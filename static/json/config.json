@@ -1,0 +1,17 @@
+{
+    "zh": {
+        "docTitle": "物联网综合运营管理平台",
+        "company": "深圳市敢为软件技术有限公司"
+    },
+    "en": {
+        "docTitle": "IoT Operation Management Platform",
+        "company": "Shenzhen Ganwei Software Technology Co., Ltd"
+    },
+    "img": {
+        "loginImg": "../../../static/Images/logoWord.png",
+        "loginFooterImg": "../../../static/Images/logo.png",
+        "indexBigImg": "../../static/Images/logos0-qh.png",
+        "indexSamllImg": "../../static/Images/logo.png"
+    },
+    "versionConversion": false
+}
