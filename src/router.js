@@ -7,8 +7,9 @@ const LOGIN = () =>
     import ('gw-base-login/src/Login.vue')
 const NOACCESS = () =>
     import ('gw-base-noAccess/noAccess.vue')
-
-
+const JUMPIFRAMED = () =>
+    import ('./views/jumpIframe/jumpIframePro.vue')
+    
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location, onResolve, onReject) {
     if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
@@ -34,14 +35,20 @@ const router = new Router({
         {
             path: '/Index',
             component: INDEX,
-            children: [
+            children: [              
                 {
                     path: 'noAccess',
                     name: 'noAccess',
                     component: NOACCESS
                 },
+                {
+                    path: 'jumpIframe/:name/:id',
+                    name: 'jumpIframe',
+                    component: JUMPIFRAMED
+                },                
             ]
-        }
+        },
+
     ]
 })
 

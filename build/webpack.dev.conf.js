@@ -42,12 +42,13 @@ const moduleList = require('./module-conf');
 let arr = [];
 for (let module of moduleList.moduleList) {
     arr.push(new HtmlWebpackPlugin({
-        filename: `./node_modules/${module}/index.html`,
-        template: `./node_modules/${module}/index.html`,
+        filename: `./src/views/${module}/index.html`,
+        template: `./src/views/${module}/index.html`,
         inject: true,
         chunks: [module]
     }))
 }
+
 const compiledPages = [];
 // 开发环境的完整的配置文件，
 const devWebpackConfig = merge(baseWebpackConfig, {

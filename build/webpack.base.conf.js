@@ -141,7 +141,7 @@ module.exports = {
                 // 读取根目录下面的.babelrc中的babel配置用于编译js文件
                 loader: 'babel-loader',
                 // 指定需要进行编译的文件的路径
-                include: [resolve('src'), resolve('node_modules/webpack-dev-server/client'), ...resolveGlob('node_modules/ganwei-base-*')]
+                include: [resolve('src'), resolve('node_modules/webpack-dev-server/client'), ...resolveGlob('src/views/ganwei-base-*')]
             },
             {
                 // 对图片资源进行编译的配置

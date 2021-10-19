@@ -18,7 +18,9 @@ async function main() {
         if (key.indexOf('ganwei') != -1) {
             pages[key] = {};
             const entry = `./build/dev-entries/${key}.js`;
-            pages[key].tempEntry = `../../node_modules/${key}/index.js`; // 暂存真正的入口文件地址
+            pages[key].tempEntry = `../../src/views/${key}/index.js`; // 暂存真正的入口文件地址
+
+
             pages[key].entry = entry;
             tasks.push(outputFile(entry, ''));
         } else {

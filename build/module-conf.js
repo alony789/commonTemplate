@@ -4,15 +4,8 @@ var glob = require('glob')
 // 获取所有的moduleList
 var moduleList = []
 
-let src;
-switch (process.env.NODE_ENV_ALL) {
-    case 'debugAll':
-        src = './node_modules/ganwei-*'
-        break;
-    default:
-        src = './src/modules/ganwei-*'
-        break;
-}
+let src = './src/views/ganwei-*';
+
 var moduleSrcArray = glob.sync(src)
 
 for (var x in moduleSrcArray) {

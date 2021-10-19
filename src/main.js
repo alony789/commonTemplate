@@ -21,8 +21,8 @@ import globalVariable from 'gw-base-utils/globalVariable.js'
 
 //中英文切换
 import VueI18n from 'vue-i18n'
-import zh from './views/language/zh-cn/zh'
-import en from './views/language/en-us/en'
+import zh from 'gw-base-language/zh-cn/zh'
+import en from 'gw-base-language/en-us/en'
 Vue.use(VueI18n)
 import ElementLocale from 'element-ui/lib/locale';
 const i18n = new VueI18n({

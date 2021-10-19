@@ -12,10 +12,10 @@ const path = require('path')
 // 多模块打包新增配置
 const MODULE = process.env.MODULE_ENV || 'undefined'
 // 入口模板路径
-// const htmlTemplate = `./src/modules/${MODULE}/index.html`
+// const htmlTemplate = `./src/modules/${MODULE}/ .html`
 
 const hostIP = 'http://192.168.6.114:44380';
-const fileName = 'ganwei-base-test'
+
 module.exports = {
 
     // 开发环境的一些基本配置
@@ -149,11 +149,11 @@ module.exports = {
     build: {
 
         // html文件的生成的地方,
-        index: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE, 'index.html') : path.resolve(__dirname, '../dist/'+fileName+'/index.html')),
+        index: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE, 'index.html') : path.resolve(__dirname, '../dist/index.html')),
 
         // Paths
         // 编译生成的文件的目录path.resolve(__dirname, '../dist'),
-        assetsRoot: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist/'+fileName)),
+        assetsRoot: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist/')),
 
         // 编译生成的静态文件的目录
         assetsSubDirectory: 'static',
