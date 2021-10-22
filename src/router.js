@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Vue from "vue";
 import Router from "vue-router";
+import encrypt from "gw-base-api/encrypt.js";
 const INDEX = () => import("./views/Index.vue");
 const LOGIN = () => import("gw-base-login/src/Login.vue");
 const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
