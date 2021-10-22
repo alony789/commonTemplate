@@ -16,8 +16,8 @@
 
     </div>
 </template>
-<script>                 
- import test from './js/test.js';
-export default test;
+<script>
+import template from './js/template.js';
+export default template;
 </script>
-<style lang="scss" src="./css/test.scss"></style>
+<style lang="scss" src="./css/template.scss"></style>

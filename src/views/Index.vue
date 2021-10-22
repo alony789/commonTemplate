@@ -941,9 +941,12 @@ export default {
                             }
                             return false;
                         })
-                        console.log(menuItems)
-                        console.log(menuItem.resourceId, '----')
-                        menuItems[menuItem.resourceId] = menuItem;
+
+                        try {
+                            menuItems[menuItem.resourceId] = menuItem;
+                        } catch (e) {
+                            console.log(e);
+                        }
                     })
                     this.menu = Object.values(menuItems)
                     window.sessionStorage.asideList = JSON.stringify(this.menu);

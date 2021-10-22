@@ -2,12 +2,12 @@
  * api模块接口列表
  */
 import apiFunction from 'gw-base-api/apiFunction';
-import test from './api/test';
+import template from './api/template';
 
 const api = Object.assign(
     {},
     apiFunction,
-    test
+    template
 );
 
 export default api;

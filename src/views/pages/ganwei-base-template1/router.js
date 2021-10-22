@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import test from './src/Index'
+import template1 from './src/Index'
 
 Vue.use(Router)
 
 export default new Router({
     routes: [{
             path: '',
-            redirect: '/test'
+            redirect: '/template1'
         },
         {
-            path: '/test',
-            name: 'test',
-            component: test
+            path: '/template1',
+            name: 'template1',
+            component: template1
         }
     ]
 })

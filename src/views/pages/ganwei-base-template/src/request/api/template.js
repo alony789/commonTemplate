@@ -1,12 +1,12 @@
 /**
- * test
+ * template
  */
 
-const test = {
+const template = {
 
     getZiChanListByPage (data) {
         return this.post('/IoT/api/v3/ZiChanService/GetZiChanListByPage', data);
     }
 }
 
-export default test;
+export default template;
