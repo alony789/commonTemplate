@@ -311,6 +311,7 @@
 </template>
 
 <script>
+import packages from './modules.json'
 export default {
     data () {
         return {
@@ -928,7 +929,23 @@ export default {
         getUserInfo () {
             this.$api.GetMenus().then(res => {
                 if (res.data.code === 200) {
-                    this.menu = JSON.parse(JSON.stringify(res.data.data));
+
+                    // this.menu = JSON.parse(JSON.stringify(res.data.data));
+                    let allMenu = JSON.parse(JSON.stringify(res.data.data));
+                    let modules = packages.name;
+                    let menuItems = {}
+                    modules.forEach(module => {
+                        let menuItem = allMenu.find(item => {
+                            if (JSON.stringify(item).indexOf(module) !== -1) {
+                                return item;
+                            }
+                            return false;
+                        })
+                        console.log(menuItems)
+                        console.log(menuItem.resourceId, '----')
+                        menuItems[menuItem.resourceId] = menuItem;
+                    })
+                    this.menu = Object.values(menuItems)
                     window.sessionStorage.asideList = JSON.stringify(this.menu);
                     if (this.menu.length > 0) {
                         this.iaHaveSnapshot = false;

@@ -2,110 +2,107 @@
  * @fileOverview 开发和生产环境的基本配置文件
  */
 
-'use strict'
+"use strict";
 
 // Template version: 1.3.1// see http://vuejs-templates.github.io/webpack for documentation.
 
 // 引入nodejs路径模块，用于操作路径
-const path = require('path')
+const path = require("path");
 
 // 多模块打包新增配置
-const MODULE = process.env.MODULE_ENV || 'undefined'
+const MODULE = process.env.MODULE_ENV || "undefined";
 // 入口模板路径
 // const htmlTemplate = `./src/modules/${MODULE}/ .html`
 
-const hostIP = 'http://192.168.6.114:44380';
+const hostIP = "http://127.0.0.1:44380";
 
 module.exports = {
-
     // 开发环境的一些基本配置
     dev: {
-
         // Paths
         // 编译输出的二级目录
-        assetsSubDirectory: 'static',
+        assetsSubDirectory: "static",
 
         // 编译发布的根目录，可配置为资源服务器域名或者cdn域名
-        assetsPublicPath: '/',
+        assetsPublicPath: "/",
 
         // 需要使用proxyTable代理的接口(用于配置跨域)
         proxyTable: {
-            '/api': {
+            "/api": {
                 target: hostIP,
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: {
-                    '^/api': '/api'
+                    "^/api": "/api"
                 },
                 headers: {
                     Referer: hostIP
                 }
             },
-            '/IoT': {
+            "/IoT": {
                 target: hostIP,
                 changeOrigin: true,
                 secure: false,
                 pathRewrite: {
-                    '^/IoT': '/IoT'
+                    "^/IoT": "/IoT"
                 },
                 headers: {
                     Referer: hostIP
                 }
             },
-            '/monitor': {
-                target: hostIP,
-                changeOrigin: true,
-                secure: false,
-                ws: true,
-                pathRewrite: {
-                    '^/monitor': '/monitor'
-                },
-                headers: {
-                    Referer: hostIP
-                }
-            },
-            '/downFileNotify': {
+            "/monitor": {
                 target: hostIP,
                 changeOrigin: true,
                 secure: false,
                 ws: true,
                 pathRewrite: {
-                    '^/downFileNotify': '/downFileNotify'
+                    "^/monitor": "/monitor"
                 },
                 headers: {
                     Referer: hostIP
                 }
             },
-            '/workOrder': {
+            "/downFileNotify": {
                 target: hostIP,
                 changeOrigin: true,
                 secure: false,
                 ws: true,
                 pathRewrite: {
-                    '^/workOrder': '/workOrder'
+                    "^/downFileNotify": "/downFileNotify"
                 },
                 headers: {
                     Referer: hostIP
                 }
             },
-            '/DownloadFile': {
+            "/workOrder": {
                 target: hostIP,
                 changeOrigin: true,
                 secure: false,
                 ws: true,
                 pathRewrite: {
-                    '^/DownloadFile': '/DownloadFile'
+                    "^/workOrder": "/workOrder"
                 },
                 headers: {
                     Referer: hostIP
                 }
             },
-
+            "/DownloadFile": {
+                target: hostIP,
+                changeOrigin: true,
+                secure: false,
+                ws: true,
+                pathRewrite: {
+                    "^/DownloadFile": "/DownloadFile"
+                },
+                headers: {
+                    Referer: hostIP
+                }
+            }
         },
 
         // Various Dev Server settings
         // 开发时候的访问域名。可以通过环境变量自己设置。
-        host: '127.0.0.1',
+        host: "127.0.0.1",
 
         // 开发时候的端口。可以通过环境变量PORT设定。如果端口被占用了，会随机分配一个未被使用的端口
         port: 7010,
@@ -136,7 +133,7 @@ module.exports = {
          * Source Maps
          */
         // source maps的格式
-        devtool: 'cheap-module-eval-source-map', // 'cheap-module-eval-source-map',
+        devtool: "cheap-module-eval-source-map", // 'cheap-module-eval-source-map',
 
         // 指定是否通过在文件名称后面添加一个查询字符串来创建source map的缓存
         cacheBusting: true,
@@ -147,19 +144,24 @@ module.exports = {
 
     // 生产编译环境下的一些基本配置
     build: {
-
         // html文件的生成的地方,
-        index: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE, 'index.html') : path.resolve(__dirname, '../dist/index.html')),
+        index:
+            process.env.NODE_ENV_ALL === "proAll"
+                ? path.resolve(__dirname, "../dist", MODULE, "index.html")
+                : path.resolve(__dirname, "../dist/index.html"),
 
         // Paths
         // 编译生成的文件的目录path.resolve(__dirname, '../dist'),
-        assetsRoot: (process.env.NODE_ENV_ALL === 'proAll' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist/')),
+        assetsRoot:
+            process.env.NODE_ENV_ALL === "proAll"
+                ? path.resolve(__dirname, "../dist", MODULE)
+                : path.resolve(__dirname, "../dist/"),
 
         // 编译生成的静态文件的目录
-        assetsSubDirectory: 'static',
+        assetsSubDirectory: "static",
 
         // 编译发布的根目录，可配置为资源服务器域名或者cdn域名
-        assetsPublicPath: './',
+        assetsPublicPath: "./",
 
         /**
          * Source Maps
@@ -169,7 +171,7 @@ module.exports = {
         productionSourceMap: false,
 
         // source maps的格式
-        devtool: 'cheap-module-source-map',
+        devtool: "cheap-module-source-map",
 
         // Gzip off by default as many popular static hosts such as
         // Surge or Netlify already gzip all static assets for you.
@@ -179,7 +181,7 @@ module.exports = {
         productionGzip: false,
 
         // 开启gzip压缩的文件的后缀名称
-        productionGzipExtensions: ['js', 'css'],
+        productionGzipExtensions: ["js", "css"],
 
         // Run the build command with an extra argument to
         // View the bundle analyzer report after build finishes:

@@ -1,96 +1,110 @@
 /* eslint-disable */
-import Vue from 'vue'
-import Router from 'vue-router'
-const INDEX = () =>
-    import ('./views/Index.vue')
-const LOGIN = () =>
-    import ('gw-base-login/src/Login.vue')
-const NOACCESS = () =>
-    import ('gw-base-noAccess/noAccess.vue')
-const JUMPIFRAMED = () =>
-    import ('./views/jumpIframe/jumpIframePro.vue')
-    
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location, onResolve, onReject) {
-    if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-    return originalPush.call(this, location).catch(err => err)
-}
+import Vue from "vue";
+import Router from "vue-router";
+const INDEX = () => import("./views/Index.vue");
+const LOGIN = () => import("gw-base-login/src/Login.vue");
+const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
+const JUMPIFRAMED = () => import("./views/jumpIframe/jumpIframePro.vue");
+const test = () => import("./views/pages/ganwei-base-test/src/Index.vue");
 
-Vue.use(Router)
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location, onResolve, onReject) {
+    if (onResolve || onReject)
+        return originalPush.call(this, location, onResolve, onReject);
+    return originalPush.call(this, location).catch(err => err);
+};
+
+Vue.use(Router);
 const router = new Router({
-    mode: 'hash',
+    mode: "hash",
     base: process.env.BASE_URL,
-    linkActiveClass: 'active',
+    linkActiveClass: "active",
     routes: [
         {
-            path: '/',
-            redirect: '/Login'
+            path: "/",
+            redirect: "/Login"
         },
         {
-            path: '/Login',
-            name: 'Login',
+            path: "/Login",
+            name: "Login",
             component: LOGIN
         },
-
         {
-            path: '/Index',
+            path: "/Index",
             component: INDEX,
-            children: [              
+            children: [
                 {
-                    path: 'noAccess',
-                    name: 'noAccess',
+                    path: "noAccess",
+                    name: "noAccess",
                     component: NOACCESS
                 },
                 {
-                    path: 'jumpIframe/:name/:id',
-                    name: 'jumpIframe',
+                    path: "jumpIframe/:name/:id",
+                    name: "jumpIframe",
                     component: JUMPIFRAMED
-                },                
+                },
+                {
+                    path: "test",
+                    name: "test",
+                    component: test
+                }
             ]
-        },
-
+        }
     ]
-})
+});
 
 router.beforeEach((to, from, next) => {
-    if (to.path == '/Login' || to.path == '/Index/noAccess' || ((from.path == '/login' || from.path == '/Login') && to.path == '/Index') || from.path == '/Index'  || to.path == '/Maintain' || to.path == '/Info') {
-        next()
-        return
-    } else if ((from.path != '/login' || from.path != '/Login') && to.path == '/Index') {
+    if(to.path === '/Login') {
+        encrypt.clearMyKey();
+    }
+    if (
+        to.path == "/Login" ||
+        to.path == "/Index/noAccess" ||
+        ((from.path == "/login" || from.path == "/Login") &&
+            to.path == "/Index") ||
+        from.path == "/Index" ||
+        to.path == "/Maintain" ||
+        to.path == "/Info"
+    ) {
+        next();
+        return;
+    } else if (
+        (from.path != "/login" || from.path != "/Login") &&
+        to.path == "/Index"
+    ) {
         if (window.sessionStorage.asideList) {
-            let asideList = JSON.parse(window.sessionStorage.asideList)
-            next(asideList[0].route)
+            let asideList = JSON.parse(window.sessionStorage.asideList);
+            next(asideList[0].route);
         } else {
-            next()
+            next();
         }
-
     } else {
-        let path = to.path
+        let path = to.path;
         if (window.sessionStorage.asideList) {
-            let asideList = JSON.parse(window.sessionStorage.asideList)
-            let haveRoute = false
-            forList(asideList)
+            let asideList = JSON.parse(window.sessionStorage.asideList);
+            let haveRoute = false;
+            forList(asideList);
 
             function forList(list) {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i].route == path) {
-                        haveRoute = true
+                        haveRoute = true;
                     }
-                    if ('children' in list[i]) {
-                        forList(list[i].children)
+                    if ("children" in list[i]) {
+                        forList(list[i].children);
                     }
                 }
             }
             if (haveRoute) {
-                next()
+                next();
             } else {
-                next(from.path)
-                return false
+                next(from.path);
+                return false;
             }
         } else {
-            next()
+            next();
         }
     }
-})
-router.afterEach((to, from, next) => {})
-export default router
+});
+router.afterEach((to, from, next) => {});
+export default router;
