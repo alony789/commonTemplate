@@ -65,13 +65,13 @@ function getModuleToBuild() {
     }
     return moduleToBuild;
 }
-try {
-    const fs = require("fs");
-    let obj = { name: moduleList };
-    fs.writeFileSync(process.env.MODULENAMES_ENV, JSON.stringify(obj));
-} catch (e) {
-    console.log(e);
-}
+// try {
+//     const fs = require("fs");
+//     let obj = { name: moduleList };
+//     fs.writeFileSync(process.env.MODULENAMES_ENV, JSON.stringify(obj));
+// } catch (e) {
+//     console.log(e);
+// }
 exports.moduleList = moduleList;
 exports.checkModule = checkModule;
 exports.getModuleToBuild = getModuleToBuild;

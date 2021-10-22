@@ -6,7 +6,6 @@
 let _env = require("../config/prod.env");
 process.env.PAGE_ENV = JSON.parse(_env.PAGE_ENV);
 process.env.PAGES_ENV = JSON.parse(_env.PAGES_ENV);
-process.env.MODULENAMES_ENV = JSON.parse(_env.MODULENAMES_ENV);
 require("./check-versions")();
 
 process.env.NODE_ENV = "production";

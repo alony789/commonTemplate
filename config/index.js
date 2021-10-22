@@ -14,7 +14,7 @@ const MODULE = process.env.MODULE_ENV || "undefined";
 // 入口模板路径
 // const htmlTemplate = `./src/modules/${MODULE}/ .html`
 
-const hostIP = "http://127.0.0.1:44380";
+const hostIP = "http://192.168.0.130:44380";
 
 module.exports = {
     // 开发环境的一些基本配置

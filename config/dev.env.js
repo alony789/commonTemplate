@@ -13,5 +13,4 @@ module.exports = merge(prodEnv, {
     NODE_ENV: '"development"',
     PAGE_ENV: '"./src/views/pages"',
     PAGES_ENV: '"../src/views/pages"',
-    MODULENAMES_ENV: '"./src/views/modules.json"'
 });

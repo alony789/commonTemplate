@@ -6,5 +6,4 @@ module.exports = {
     NODE_ENV: '"production"',
     PAGE_ENV: '"./src/views/pages"',
     PAGES_ENV: '"../src/views/pages"',
-    MODULENAMES_ENV: '"./src/views/modules.json"'
 };
