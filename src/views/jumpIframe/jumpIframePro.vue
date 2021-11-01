@@ -38,6 +38,8 @@ export default {
         iframe.onload = () => {
             this.groupLoad = false;
             $('#jumpIframe').css('padding', '0px').contents().find('#app').css('padding', '0px 16px');
+            let theme = localStorage.getItem('theme');
+            iframe.contentWindow.document.documentElement.setAttribute('data-theme', theme)
         };
 
     },

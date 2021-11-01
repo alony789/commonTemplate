@@ -164,7 +164,7 @@ module.exports = {
                     limit: 10000,
                     // 生成的文件的保存路径和后缀名称
                     publicPath:
-                        process.env.NODE_ENV_ALL == "proAll" ? "./" : "../../",
+                        process.env.NODE_ENV_ALL == "proAll" ? "./" : "/",
                     name: utils.assetsPath("img/[name].[hash:7].[ext]")
                 }
             },

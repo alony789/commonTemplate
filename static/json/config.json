@@ -13,5 +13,6 @@
         "indexBigImg": "../../static/Images/logos0-qh.png",
         "indexSamllImg": "../../static/Images/logo.png"
     },
-    "versionConversion": false
+    "versionConversion": false,
+    "theme": "dark"
 }

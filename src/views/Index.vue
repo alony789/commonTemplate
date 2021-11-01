@@ -191,6 +191,20 @@
                 <a href="#" @click.stop.prevent="onAsideListShow()">
                     <i class="iconfont iconcebianlanzhankai"></i>{{ $t("home.workbench") }}</a>
                 <div class="header-right displayNone">
+                    <!-- <el-dropdown class="index-header-right">
+                        <span class="el-dropdown-link index-header-right">
+                            <i class="iconfont icon_xieyiqiehuan"></i>
+                        </span>
+                        <el-dropdown-menu style="padding: 10px; margin-top: -10px" slot="dropdown" class="dropdownMenu">
+                            <p @click="checkStyle('dark')" style="padding-bottom: 15px;cursor: pointer;">暗</p>
+                            <p @click="checkStyle('light')" style="cursor: pointer;">亮</p>
+                        </el-dropdown-menu>
+
+                    </el-dropdown> -->
+                    <div class="themeImage" @click="checkStyle(islightStyle)">
+                        <img src="/static/Images/theme-light.svg" alt="" v-if="islightStyle">
+                        <img src="/static/Images/theme-dark2.svg" alt="" v-else>
+                    </div>
                     <el-avatar>{{ loginUn }}</el-avatar>
                     <el-dropdown class="index-header-right">
                         <span class="el-dropdown-link index-header-right">
@@ -392,7 +406,8 @@ export default {
             pwdMinCharactersMsg: undefined,
             delayTime: 5000,
             exportSignalrConnection: null,
-            noPermission: false
+            noPermission: false,
+            islightStyle: false
         };
     },
 
@@ -425,6 +440,9 @@ export default {
                     }
                 ]
             };
+        },
+        theme() {
+            return this.islightStyle ? 'light' : 'dark';
         }
     },
 
@@ -433,6 +451,7 @@ export default {
             sessionStorage.languageSet = 'zh-CN';
             this.$i18n.locale = 'zh-CN';
         }
+        localStorage.getItem('theme') === 'light' ? this.islightStyle = true : this.islightStyle = false;
         this.initIAM();
     },
     mounted () {
@@ -468,6 +487,7 @@ export default {
             this.smallImg = data.img.indexSamllImg;
             this.bigImg = data.img.indexBigImg;
         });
+        window.document.documentElement.setAttribute('data-theme', this.theme)
     },
     beforeDestroy () {
         clearTimeout(this.intevalObj);
@@ -931,6 +951,7 @@ export default {
                 if (res.data.code === 200) {
 
                     this.menu = JSON.parse(JSON.stringify(res.data.data));
+
                     // let allMenu = JSON.parse(JSON.stringify(res.data.data));
                     // let modules = packages.name;
                     // let menuItems = {}
@@ -1208,18 +1229,16 @@ export default {
                 wscript.SendKeys('{F11}');
             }
         },
-        checkStyle (style) {
-            switch (style) {
-                case 'dark':
-                    window.localStorage.styleTheme = style;
-                    break;
-                case 'light':
-                    window.localStorage.styleTheme = style;
-                    break;
-                default:
-                    window.localStorage.styleTheme = style;
-                    break;
+        checkStyle (islightStyle) {
+            this.islightStyle = !islightStyle;
+            if (this.theme == localStorage.getItem('theme')) {
+                return;
             }
+            localStorage.setItem('theme', this.theme)
+            window.document.documentElement.setAttribute('data-theme', this.theme);
+            document.querySelector('iframe').contentWindow.document.documentElement.setAttribute('data-theme', this.theme);
+            let iframe = document.getElementById('jumpIframe').contentWindow;
+            iframe.postMessage({theme: this.theme});
         }
     }
 };

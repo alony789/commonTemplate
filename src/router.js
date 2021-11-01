@@ -6,7 +6,6 @@ const INDEX = () => import("./views/Index.vue");
 const LOGIN = () => import("gw-base-login/src/Login.vue");
 const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
 const JUMPIFRAMED = () => import("./views/jumpIframe/jumpIframePro.vue");
-const template = () => import("./views/pages/ganwei-base-template/src/Index.vue");
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -43,11 +42,6 @@ const router = new Router({
                     path: "jumpIframe/:name/:id",
                     name: "jumpIframe",
                     component: JUMPIFRAMED
-                },
-                {
-                    path: "template",
-                    name: "template",
-                    component: template
                 }
             ]
         }
