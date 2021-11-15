@@ -441,7 +441,7 @@ export default {
                 ]
             };
         },
-        theme() {
+        theme () {
             return this.islightStyle ? 'light' : 'dark';
         }
     },
@@ -922,7 +922,7 @@ export default {
                 })
                 .catch(err => {
 
-                    if (err.status == 401) {
+                    if (err.status == 401 || err.status == 403) {
                         clearTimeout(that.intevalObj)
                         that.intevalObj = null;
                         that.noPermission = true;
@@ -1238,7 +1238,7 @@ export default {
             window.document.documentElement.setAttribute('data-theme', this.theme);
             document.querySelector('iframe').contentWindow.document.documentElement.setAttribute('data-theme', this.theme);
             let iframe = document.getElementById('jumpIframe').contentWindow;
-            iframe.postMessage({theme: this.theme});
+            iframe.postMessage({ theme: this.theme });
         }
     }
 };
