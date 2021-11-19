@@ -16,8 +16,7 @@ export default {
     },
 
     mounted () {
-        let devSrc = process.env.NODE_ENV_ALL == 'debugAll' ? process.env.PAGE_ENV : '';
-        let packageSrc = process.env.NODE_ENV == 'development' ? devSrc + '/' : ''
+        let packageSrc = process.env.NODE_ENV == 'development' ? process.env.PAGE_ENV + '/' : ''
         let queryVal = this.$route.query.systemName ? ('?systemName=' + this.$route.query.systemName) : '';
         this.url = this.$router.currentRoute.path.replace('/Index/jumpIframe/', '');
         this.url.indexOf('.html') != -1 ? (this.url = packageSrc + this.url + queryVal) : (this.url = packageSrc + this.url.replace('/', '/#/') + queryVal);

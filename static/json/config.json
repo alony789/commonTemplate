@@ -14,5 +14,10 @@
         "indexSamllImg": "../../static/Images/logo.png"
     },
     "versionConversion": false,
-    "theme": "dark"
+    "theme": "dark",
+    "ssoLogin": {
+        "api": "/api/njzc/sso",
+        "method": "post",
+        "url": "/"
+    }
 }

@@ -66,14 +66,14 @@
         "vuedraggable": "2.23.0",
         "vuex": "^3.1.1",
         "webpack-dev-server": "^2.9.1",
-        "gw-base-api": "^1.0.12",
-        "gw-base-components": "^2.0.6",
+        "gw-base-api": "^1.0.13",
+        "gw-base-components": "^2.0.7",
         "gw-base-font": "^1.0.0",
         "gw-base-language": "^1.0.6",
-        "gw-base-login": "^2.0.2",
+        "gw-base-login": "^2.0.4",
         "gw-base-noAccess": "^1.0.1",
-        "gw-base-style": "^2.0.9",
-        "gw-base-utils": "^1.0.3"
+        "gw-base-style": "^2.1.0",
+        "gw-base-utils": "^1.0.4"
     },
     "devDependencies": {
         "autoprefixer": "^7.1.2",

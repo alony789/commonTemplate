@@ -201,10 +201,10 @@
                         </el-dropdown-menu>
 
                     </el-dropdown> -->
-                    <div class="themeImage" @click="checkStyle(islightStyle)">
+                    <!-- <div class="themeImage" @click="checkStyle(islightStyle)">
                         <img src="/static/Images/theme-light.svg" alt="" v-if="islightStyle">
                         <img src="/static/Images/theme-dark2.svg" alt="" v-else>
-                    </div>
+                    </div> -->
                     <el-avatar>{{ loginUn }}</el-avatar>
                     <el-dropdown class="index-header-right">
                         <span class="el-dropdown-link index-header-right">
@@ -407,7 +407,7 @@ export default {
             delayTime: 5000,
             exportSignalrConnection: null,
             noPermission: false,
-            islightStyle: false
+            islightStyle: localStorage.getItem('theme') === 'light'
         };
     },
 
@@ -451,8 +451,10 @@ export default {
             sessionStorage.languageSet = 'zh-CN';
             this.$i18n.locale = 'zh-CN';
         }
-        localStorage.getItem('theme') === 'light' ? this.islightStyle = true : this.islightStyle = false;
-        this.initIAM();
+
+        this.init();
+        this.getUserInfo();
+        this.getUserName2SF();
     },
     mounted () {
 
@@ -654,62 +656,6 @@ export default {
                 ? (this.$i18n.locale = 'en')
                 : (this.$i18n.locale = 'zh-CN'); // 设置中英文模式
             localStorage.setItem('languageSet', this.$i18n.locale); // 将用户设置存储到localStorage以便用户下次打开时使用此设置
-        },
-
-        // 单点登陆接口
-        initIAM () {
-
-            let code = this.getQueryParm('code');
-            let state = this.getQueryParm('state');
-
-            //    window.sessionStorage.accessToken &&
-            //     window.sessionStorage.accessToken != ''
-
-            if (
-                !code && !state
-            ) {
-                this.init();
-                this.getUserInfo();
-                this.getUserName2SF();
-            } else {
-                this.$router.push({ path: '/Index' });
-                this.$api
-                    .IamGetToken({
-                        code: code,
-                        state: state
-                    })
-                    .then(res => {
-                        this.isRouter = true;
-                        if (res.data.code == 200) {
-
-                            // 登陆成功操作
-
-                            this.loginUsername = window.sessionStorage.userName =
-                                res.data.data.userName;
-
-                            // sessionStorage.SRToken = 'Bearer ' + token;
-                            // window.sessionStorage.setItem(
-                            //     'accessToken',
-                            //     'Bearer ' + token
-                            // );
-                            window.sessionStorage.setItem(
-                                'isSingleSignOn',
-                                res.data.data.isSingleSignOn
-                            );
-                            this.init();
-                            this.getUserInfo();
-                            this.getUserName2SF();
-                        } else {
-                            this.$message({
-                                message: res.data.message,
-                                type: 'error'
-                            });
-                        }
-                    })
-                    .catch(er => {
-                        this.isRouter = true;
-                    });
-            }
         },
 
         getQueryParm (name) {
@@ -1140,7 +1086,7 @@ export default {
             this.modal2 = false;
             this.$api.loginOut().then(rt => {
                 if (rt.data.code == 200) {
-                    let code = window.sessionStorage.getItem('isSingleSignOn');
+                    let isSsoLogin = window.sessionStorage.getItem('isSsoLogin');
                     window.sessionStorage.clear();
                     this.$message.success(this.$t('home.tips.loggedOut'));
                     this.globalVariable.initsEquipAList = {};
@@ -1149,10 +1095,12 @@ export default {
                         // eslint-disable-next-line
                         myJavaFun.OpenLocalUrl('login');
                     } catch (e) {
-                        if (code == null || code == undefined || !code) {
+                        if (isSsoLogin == null || isSsoLogin == undefined || !isSsoLogin) {
                             this.$router.replace('/Login');
                         } else {
-                            window.location.href = '/loginOut.html';
+
+                            // window.location.href = '/loginOut.html';
+                            this.$router.replace('/ssoLogout');
                         }
                     }
                 } else {

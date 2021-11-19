@@ -9,6 +9,10 @@ export default {
     name: 'App',
     data () {
         return {};
+    },
+    mounted () {
+        let style = window.localStorage.theme
+        window.document.documentElement.setAttribute('data-theme', style || 'dark')
     }
 };
 </script>

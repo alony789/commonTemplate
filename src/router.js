@@ -6,6 +6,8 @@ const INDEX = () => import("./views/Index.vue");
 const LOGIN = () => import("gw-base-login/src/Login.vue");
 const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
 const JUMPIFRAMED = () => import("./views/jumpIframe/jumpIframePro.vue");
+const SSOLOGIN = () => import("gw-base-login/src/ssoLogin.vue");
+const SSOLOGOUT = () => import("gw-base-login/src/ssoLogout.vue");
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -30,6 +32,16 @@ const router = new Router({
             component: LOGIN
         },
         {
+            path: "/ssoLogin",
+            name: "ssoLogin",
+            component: SSOLOGIN
+        },
+        {
+            path: "/ssoLogout",
+            name: "ssoLogout",
+            component: SSOLOGOUT
+        },
+        {
             path: "/Index",
             component: INDEX,
             children: [
@@ -39,7 +51,7 @@ const router = new Router({
                     component: NOACCESS
                 },
                 {
-                    path: "jumpIframe/:name/:id",
+                    path: "jumpIframe/*",
                     name: "jumpIframe",
                     component: JUMPIFRAMED
                 }
@@ -49,8 +61,16 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    if(to.path === '/Login') {
+    if (to.path === "/Login") {
         encrypt.clearMyKey();
+    }
+    if (
+        to.path == "/ssoLogin" ||
+        to.path == "/ssoLogout" ||
+        (from.path == "/ssoLogin" && to.path == "/Index")
+    ) {
+        next();
+        return;
     }
     if (
         to.path == "/Login" ||
@@ -97,7 +117,7 @@ router.beforeEach((to, from, next) => {
                 return false;
             }
         } else {
-            next();
+            next("/Login");
         }
     }
 });

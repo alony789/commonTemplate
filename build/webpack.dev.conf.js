@@ -151,8 +151,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     plugins: [
         // 创建一个在编译时可以配置的全局变量
         new webpack.DefinePlugin({
-            "process.env": _env,
-            "process.env.NODE_ENV_ALL": JSON.stringify(process.env.NODE_ENV_ALL)
+            "process.env": _env
         }),
         // 启用热替换/更新模块 记住，我们永远不要再生产环境中使用hmr
         new webpack.HotModuleReplacementPlugin(),

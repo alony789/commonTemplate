@@ -18,6 +18,9 @@ import "gw-base-font/iconfont.css";
 import loadMore from "gw-base-components/loadMore/loadMore";
 import globalVariable from "gw-base-utils/globalVariable.js";
 
+import loading from 'gw-base-components/loading'
+import message from 'gw-base-utils/message'
+
 //中英文切换
 import VueI18n from "vue-i18n";
 import zh from "gw-base-language/zh-cn/zh";
@@ -38,6 +41,8 @@ ElementLocale.i18n((key, value) => i18n.t(key, value));
 export default i18n;
 Vue.use(loadMore);
 Vue.use(Element);
+Vue.use(loading)
+Vue.prototype.$message = message
 const bus = new Vue();
 
 Vue.config.productionTip = false;
