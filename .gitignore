@@ -20,3 +20,6 @@ RoleManage-只修改了可看设备为树状结构.vue
 debug.log
 package-lock.json
 /build/dev-entries/
+
+/src/views/ganwei-*
+/src/views/nobase

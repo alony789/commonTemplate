@@ -1,13 +1,18 @@
 /* eslint-disable */
 import Vue from "vue";
 import Router from "vue-router";
-import encrypt from "gw-base-api/encrypt.js";
+import encrypt from "gw-base-api-plus/encrypt.js";
 const INDEX = () => import("./views/Index.vue");
-const LOGIN = () => import("gw-base-login/src/Login.vue");
+const LOGIN = () => import("gw-base-login-plus/src/Login.vue");
 const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
 const JUMPIFRAMED = () => import("./views/jumpIframe/jumpIframePro.vue");
-const SSOLOGIN = () => import("gw-base-login/src/ssoLogin.vue");
-const SSOLOGOUT = () => import("gw-base-login/src/ssoLogout.vue");
+const SSOLOGIN = () => import("gw-base-login-plus/src/ssoLogin.vue");
+const SSOLOGOUT = () => import("gw-base-login-plus/src/ssoLogout.vue");
+
+// 许可维护
+const MAINTENANCEINFO = () =>
+    import("gw-base-login-plus/src/maintenanceInfo.vue");
+const MAININFO = () => import("gw-base-login-plus/src/mainInfo.vue");
 
 const originalPush = Router.prototype.push;
 Router.prototype.push = function push(location, onResolve, onReject) {
@@ -42,6 +47,16 @@ const router = new Router({
             component: SSOLOGOUT
         },
         {
+            path: "/Maintain",
+            name: "Maintain",
+            component: MAINTENANCEINFO
+        },
+        {
+            path: "/mainInfo",
+            name: "mainInfo",
+            component: MAININFO
+        },
+        {
             path: "/Index",
             component: INDEX,
             children: [
@@ -59,7 +74,6 @@ const router = new Router({
         }
     ]
 });
-
 router.beforeEach((to, from, next) => {
     if (to.path === "/Login") {
         encrypt.clearMyKey();
@@ -72,6 +86,7 @@ router.beforeEach((to, from, next) => {
         next();
         return;
     }
+
     if (
         to.path == "/Login" ||
         to.path == "/Index/noAccess" ||
@@ -79,7 +94,7 @@ router.beforeEach((to, from, next) => {
             to.path == "/Index") ||
         from.path == "/Index" ||
         to.path == "/Maintain" ||
-        to.path == "/Info"
+        to.path == "/mainInfo"
     ) {
         next();
         return;
@@ -121,5 +136,5 @@ router.beforeEach((to, from, next) => {
         }
     }
 });
-router.afterEach((to, from, next) => {});
+router.afterEach((to, from) => {});
 export default router;

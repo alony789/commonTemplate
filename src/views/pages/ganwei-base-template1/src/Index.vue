@@ -7,7 +7,7 @@
         </header>
 
         <section id="elTable">
-           {{content}}
+            {{content}}
         </section>
 
         <div class="equip-paging mobilePagination">

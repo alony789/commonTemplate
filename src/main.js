@@ -1,25 +1,24 @@
 /* eslint-disable */
 import Vue from "vue";
 import Element from "element-ui";
-// import "element-ui/lib/theme-chalk/index.css";
 import "element-ui/lib/theme-chalk/display.css";
 import store from "./store";
 import Axios from "axios";
 import App from "./App";
 import router from "./router";
-import myUtils from "gw-base-utils/myUtils";
-import api from "gw-base-api/api";
-import getCode from "gw-base-api/encrypt.js";
-import "gw-base-style/elementStyleReset/index.css";
-import "gw-base-style/elementStyleReset/reset.scss";
-import "gw-base-style/style.scss";
-import "gw-base-font/iconfont.css";
+import myUtils from "gw-base-utils-plus/myUtils";
+import api from "gw-base-api-plus/api";
+import getCode from "gw-base-api-plus/encrypt.js";
+import "gw-base-style-plus/elementStyleReset/index.css";
+import "gw-base-style-plus/elementStyleReset/reset.scss";
+import "gw-base-style-plus/style.scss";
+import "gw-base-font-plus/iconfont.css";
 
-import loadMore from "gw-base-components/loadMore/loadMore";
-import globalVariable from "gw-base-utils/globalVariable.js";
+import loadMore from "gw-base-components-plus/loadMore/loadMore";
+import globalVariable from "gw-base-utils-plus/globalVariable.js";
 
-import loading from 'gw-base-components/loading'
-import message from 'gw-base-utils/message'
+import loading from "gw-base-components-plus/loading";
+import notify from "gw-base-utils-plus/notification";
 
 //中英文切换
 import VueI18n from "vue-i18n";
@@ -41,8 +40,8 @@ ElementLocale.i18n((key, value) => i18n.t(key, value));
 export default i18n;
 Vue.use(loadMore);
 Vue.use(Element);
-Vue.use(loading)
-Vue.prototype.$message = message
+Vue.use(loading);
+Vue.prototype.$message = notify;
 const bus = new Vue();
 
 Vue.config.productionTip = false;
@@ -60,6 +59,8 @@ Vue.prototype.myUtils = myUtils;
 
 /* 将api 挂载到 vue 的原型上 */
 Vue.prototype.$api = api;
+
+Vue.prototype.$notify = notify;
 
 window.vm = new Vue({
     router,

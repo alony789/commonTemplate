@@ -8,13 +8,13 @@
             display: block;
             width: auto !important;
             min-width: 80px;
-            float: none!important;
+            float: none !important;
         }
     }
 }
 
 .upload-demo .el-upload__input,
-.upload-demo>ul {
+.upload-demo > ul {
     display: none;
 }
 
@@ -51,13 +51,12 @@
     min-width: 950px;
     height: 100%;
     border-radius: 3px;
-    background: $foregroundColor_1;
-    #elTable{
+    #elTable {
         color: white;
     }
     .el-table {
         background-color: transparent !important;
-        
+
         th.gutter,
         colgroup.gutter {
             display: table-cell !important;
@@ -68,9 +67,9 @@
             tr {
                 background: #181c29 !important;
             }
-            th{
+            th {
                 padding: 0;
-                div{
+                div {
                     @include tableHeader;
                 }
             }
@@ -124,7 +123,6 @@
                 }
             }
 
-
             .hover-row {
                 .cell {
                     transition: 0.3s;
@@ -138,7 +136,7 @@
         background-color: #3875ff !important;
     }
 
-    >header {
+    > header {
         border-bottom: 1px solid rgba(240, 244, 255, 0.16);
         @include page-header;
         padding-left: 0;
@@ -204,7 +202,7 @@
         }
     }
 
-    >section {
+    > section {
         width: 100%;
         height: calc(100% - 64px - 48px);
 
@@ -314,6 +312,9 @@
         border-top: 0.5px solid $n-borderColor;
         @include pagination;
     }
+    .equip-paging.mobilePagination {
+        background-color: transparent !important;
+    }
 
     input {
         padding: 0 8px;
@@ -368,7 +369,7 @@
                 background-color: $n-borderColor;
             }
 
-            >span {
+            > span {
                 display: block;
                 width: 72px;
                 line-height: 32px;
@@ -462,7 +463,7 @@
             position: relative;
             height: 660px;
 
-            >header {
+            > header {
                 @include frameHeader(-46px);
             }
 
@@ -471,7 +472,7 @@
                 overflow-y: auto;
                 overflow-x: hidden;
 
-                >div {
+                > div {
                     width: 100%;
 
                     .title {
@@ -587,11 +588,11 @@
                             width: 30%;
                         }
 
-                        >div {
+                        > div {
                             width: calc(33.3% - 12px);
                             @include pAndI;
 
-                            >div {
+                            > div {
                                 margin-top: 8px;
                                 width: 100%;
                                 border-radius: 3px;
@@ -607,8 +608,8 @@
 
                 // 厂家信息
                 .manufacturer_information {
-                    >div {
-                        >div {
+                    > div {
+                        > div {
                             width: calc(25% - 12px);
                         }
 
@@ -626,7 +627,7 @@
         .maintenanceRecordUpdate_box {
             position: relative;
 
-            >header {
+            > header {
                 @include frameHeader(-46px);
             }
 
@@ -641,14 +642,14 @@
                     top: 0;
                 }
 
-                >div {
+                > div {
                     width: calc(33.33% - 10.6px);
 
                     &:last-child {
                         width: calc(66.66% - 5.4px);
                     }
 
-                    >div {
+                    > div {
                         margin-top: 8px;
                         width: 100%;
                         border-radius: 3px;
@@ -728,7 +729,7 @@
             position: relative;
             height: 402px;
 
-            >header {
+            > header {
                 @include frameHeader(-46px);
             }
 
@@ -757,7 +758,7 @@
                         color: $textColor_3;
                     }
 
-                    >div {
+                    > div {
                         span {
                             cursor: pointer;
                         }
@@ -777,7 +778,7 @@
                     background-color: $n-middleColor;
                     overflow-y: auto;
 
-                    >div {
+                    > div {
                         padding: 0 10px;
                         margin-bottom: 4px;
                         height: 32px;
@@ -824,7 +825,7 @@
                 line-height: 64px;
                 padding-left: 0;
 
-                &>span:nth-child(1) {
+                & > span:nth-child(1) {
                     float: left;
                     font-size: $fontH18;
                 }
@@ -867,13 +868,13 @@
                     }
 
                     .el-form {
-                        &>.el-row {
+                        & > .el-row {
                             padding: 0 10px;
                         }
 
-                        &>.el-row:nth-child(1),
-                        &>.el-row:nth-child(2) {
-                            &>.el-col-8 {
+                        & > .el-row:nth-child(1),
+                        & > .el-row:nth-child(2) {
+                            & > .el-col-8 {
                                 width: 100% !important;
 
                                 .left_img_box {
@@ -901,7 +902,7 @@
                             padding: 10px;
                             width: 100%;
 
-                            &>div {
+                            & > div {
                                 width: 100% !important;
                             }
                         }
@@ -929,13 +930,13 @@
                     overflow: hidden;
 
                     .maintenanceRecordUpdate_main {
-                        &>div:nth-child(1) {
+                        & > div:nth-child(1) {
                             input {
                                 margin: 8px 0 0 0;
                             }
                         }
 
-                        &>div {
+                        & > div {
                             width: 100% !important;
                             margin: 8px 0 16px 0;
 
@@ -965,7 +966,7 @@
                     @include mobileAlertHeader;
                     padding: 15px;
 
-                    &>span {
+                    & > span {
                         display: block;
                         height: 100%;
                         text-align: center;
@@ -974,7 +975,8 @@
 
                     border-bottom: 1px solid $n-borderColor;
 
-                    .el-dialog__headerbtn {}
+                    .el-dialog__headerbtn {
+                    }
                 }
 
                 .el-dialog__body {
@@ -1048,8 +1050,11 @@
     }
 }
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {}
+@media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+}
 
-@media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {}
+@media (min-width: $screen-md-min) and (max-width: $screen-lg-min) {
+}
 
-@media (min-width: $screen-lg-min) {}
+@media (min-width: $screen-lg-min) {
+}

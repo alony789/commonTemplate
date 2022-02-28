@@ -14,167 +14,21 @@
                     <div class="left-nav" @click.stop>
                         <!-- 新版导航菜单 -->
                         <el-row class="list">
-                            <div class="historical">
-                                <el-dropdown v-if="historicalList.length > 0">
-                                    <p class="title">
-                                        <i class="iconfont iconlishijilu"></i>
-                                        <span v-show="!isCollapse">{{
-                                                $t("menuJson.history")
-                                            }}</span>
-                                    </p>
-                                    <el-dropdown-menu style="padding: 10px; margin-top: -5px" slot="dropdown">
-                                        <p class="index-historical" @click="onHistorical(item)" v-for="(item, i) in historicalList" :key="i" type="default" style="font-size: 14px; cursor: pointer; padding: 10px 0">
-                                            <router-link :to="{ path: item.route }">
-                                                <i class="iconfont" :class="item.icon"></i>
-                                                <span>{{ $t(item.name) }}</span>
-                                            </router-link>
-                                        </p>
-                                    </el-dropdown-menu>
-                                </el-dropdown>
-                            </div>
                             <div class="max">
-                                <div v-for="(itemI, i) in menu" :key="i" :class="{
-                                        pcShow:
-                                            'menuOwner' in itemI &&
-                                            itemI.menuOwner === 1,
-                                        appShow:
-                                            'menuOwner' in itemI &&
-                                            itemI.menuOwner === 2
-                                    }">
-                                    <!-- 含有二级菜单 -->
-                                    <div class="multistage" v-if="itemI.children">
-                                        <p v-show="!isCollapse" class="title title-border">
-                                            {{ $t(itemI.name) }}
-                                        </p>
-
-                                        <div v-for="(itemJ, j) in itemI.children" :key="j" :class="{
-                                                pcShow:
-                                                    'menuOwner' in itemJ &&
-                                                    itemJ.menuOwner === 1,
-                                                appShow:
-                                                    'menuOwner' in itemJ &&
-                                                    itemJ.menuOwner === 2
-                                            }">
-                                            <!-- 含有三级菜单的二级标题 -->
-                                            <div class="three-levels" v-if="
-                                                    itemI.children &&
-                                                        itemJ.children.length >
-                                                            0
-                                                ">
-                                                <p v-show="!isCollapse" class="title three-levels-title">
-                                                    {{ $t(itemJ.name) }}
-                                                </p>
-                                                <!-- 三级 -->
-                                                <p class="title p-hover" :class="{
-                                                        'menu-active':
-                                                            menuActive ==
-                                                            itemK.route
-                                                    }" @click.stop.prevent="
-                                                        onRouters(
-                                                            1,
-                                                            itemK,
-                                                            itemI,
-                                                            itemJ
-                                                        )
-                                                    " v-for="(itemK,
-                                                    k) in itemJ.children" :key="k">
-                                                    <router-link :to="{
-                                                            path: itemK.route
-                                                        }">
-                                                        <i v-show="!isCollapse" class="iconfont" :class="itemK.icon"></i>
-                                                        <span v-show="!isCollapse">{{
-                                                                $t(itemK.name)
-                                                            }}</span>
-                                                        <el-tooltip v-show="isCollapse" class="item" effect="dark" :content="
-                                                                $t(itemK.name)
-                                                            " placement="right">
-                                                            <el-button>
-                                                                <i class="iconfont" :class="
-                                                                        itemK.icon
-                                                                    "></i>
-                                                            </el-button>
-                                                        </el-tooltip>
-                                                    </router-link>
-                                                </p>
-                                            </div>
-
-                                            <!-- 不含有三级菜单的二级标题 -->
-                                            <div class="multistage-alone" v-else>
-                                                <p class="title p-hover" :class="{
-                                                        'menu-active':
-                                                            menuActive ==
-                                                            itemJ.route
-                                                    }" @click.stop.prevent="
-                                                        onRouters(
-                                                            1,
-                                                            itemJ,
-                                                            itemI
-                                                        )
-                                                    ">
-                                                    <router-link :to="{
-                                                            path: itemJ.route
-                                                        }">
-                                                        <i v-show="!isCollapse" class="iconfont" :class="itemJ.icon"></i>
-                                                        <span v-show="!isCollapse">{{
-                                                                $t(itemJ.name)
-                                                            }}</span>
-                                                        <el-tooltip v-show="isCollapse" class="item" effect="dark" :content="
-                                                                $t(itemJ.name)
-                                                            " placement="right">
-                                                            <el-button>
-                                                                <i class="iconfont" :class="
-                                                                        itemJ.icon
-                                                                    "></i>
-                                                            </el-button>
-                                                        </el-tooltip>
-                                                    </router-link>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- 只有一级菜单 -->
-                                    <div v-else class="alone">
-                                        <p v-show="
-                                                !isCollapse &&
-                                                    itemI.title !== '首页'
-                                            " class="title title-border">
-                                            {{ $t(itemI.name) }}
-                                        </p>
-                                        <p class="path-name p-hover" :class="{
-                                                'menu-active':
-                                                    menuActive == itemI.route
-                                            }" @click.stop.prevent="
-                                                onRouters(1, itemI, itemI)
-                                            ">
-                                            <router-link :to="{ path: itemI.route }">
-                                                <i v-show="!isCollapse" class="iconfont" :class="itemI.icon"></i>
-                                                <span v-show="!isCollapse">{{
-                                                        $t(itemI.name)
-                                                    }}</span>
-                                                <el-tooltip v-show="isCollapse" class="item" effect="dark" :content="$t(itemI.name)" placement="right">
-                                                    <el-button>
-                                                        <i class="iconfont" :class="itemI.icon"></i>
-                                                    </el-button>
-                                                </el-tooltip>
-                                            </router-link>
-                                        </p>
-                                    </div>
-                                </div>
+                                <el-menu ref="menu" :router="true" :default-active="menuActive" @select="onRouters" :collapse='isCollapse' :collapse-transition='false'>
+                                    <asideMenu v-for="item in menu" :data="item" :key="item.resourceId"></asideMenu>
+                                </el-menu>
                             </div>
                         </el-row>
                         <div class="fold">
                             <div @click.stop.prevent="onAsideListShow()">
-                                <el-tooltip class="item" effect="dark" :content="
-                                        $t('menuJson.collapseNavigationBar')
-                                    " placement="right">
-                                    <el-button>
-                                        <i :class="
+                                <el-button>
+                                    <i :class="
                                                 isCollapse
-                                                    ? 'iconfont iconcebianlanzhankai cacelmargin'
-                                                    : 'iconfont iconcebianlanzhankai'
+                                                    ? 'iconfont icon-caidan_zhankai cacelmargin'
+                                                    : 'iconfont icon-caidan_zhankai isopen'
                                             "></i>
-                                    </el-button>
-                                </el-tooltip>
+                                </el-button>
                                 <span v-show="!isCollapse && isCollapseText">{{
                                         $t("menuJson.closeNavigationBar")
                                     }}</span>
@@ -185,46 +39,39 @@
             </transition>
         </div>
 
-        <!-- breadcrumb -->
         <el-container>
             <el-header class="indexHeader">
                 <a href="#" @click.stop.prevent="onAsideListShow()">
                     <i class="iconfont iconcebianlanzhankai"></i>{{ $t("home.workbench") }}</a>
                 <div class="header-right displayNone">
-                    <!-- <el-dropdown class="index-header-right">
-                        <span class="el-dropdown-link index-header-right">
-                            <i class="iconfont icon_xieyiqiehuan"></i>
-                        </span>
-                        <el-dropdown-menu style="padding: 10px; margin-top: -10px" slot="dropdown" class="dropdownMenu">
-                            <p @click="checkStyle('dark')" style="padding-bottom: 15px;cursor: pointer;">暗</p>
-                            <p @click="checkStyle('light')" style="cursor: pointer;">亮</p>
-                        </el-dropdown-menu>
 
-                    </el-dropdown> -->
+                    <div>
+                        <img v-if="n % 2 == 0" src="/static/Images/fullScreen.svg" alt="" @click.stop.prevent="getFullCreeen()">
+                        <i v-else class="iconfont icontuichuquanping2-copy" @click.stop.prevent="getFullCreeen()"></i>
+                    </div>
+
                     <!-- <div class="themeImage" @click="checkStyle(islightStyle)">
-                        <img src="/static/Images/theme-light.svg" alt="" v-if="islightStyle">
-                        <img src="/static/Images/theme-dark2.svg" alt="" v-else>
+                    <img src="/static/Images/skin.svg" alt="">
                     </div> -->
-                    <el-avatar>{{ loginUn }}</el-avatar>
+
                     <el-dropdown class="index-header-right">
-                        <span class="el-dropdown-link index-header-right">
-                            {{ loginUsername }}
-                            <i class="iconfont iconxiajiantou"></i>
-                        </span>
-                        <el-dropdown-menu style="padding: 10px; margin-top: -10px" slot="dropdown">
-                            <p @click.stop.prevent="onSystemOperationInfor()" type="default" style="cursor: pointer; color: #63e03f">
+                        <el-avatar :src="'/static/Images/user1.svg'" shape="square"></el-avatar>
+                        <el-dropdown-menu style="padding: 10px;" slot="dropdown">
+                            <p @click.stop.prevent="onSystemOperationInfor()" type="default" style="cursor: pointer;color: #F0F4FF;">
+                                <i class="iconfont icon-xitongxinxi"></i>
                                 {{ this.$t("home.dialog.sysTemInfo") }}
                             </p>
-                            <p @click.stop.prevent="showEditPwd" type="default" style="padding: 20px 0; cursor: pointer; color: #2779E6">
+                            <p @click.stop.prevent="showEditPwd" type="default" style="cursor: pointer;color: #F0F4FF;">
+                                <i class="iconfont icon-xiugaimima"></i>
                                 {{ this.$t("home.dialog.changePassword") }}
                             </p>
-                            <p @click.stop.prevent="modal2 = true" type="default" style="cursor: pointer; color: #FF5A65">
+                            <p @click.stop.prevent="modal2 = true" type="default" style="cursor: pointer;color: #F0F4FF;">
+                                <i class="iconfont icon-tuichudenglu"></i>
                                 {{ this.$t("home.dialog.logOut") }}
                             </p>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <i v-if="n % 2 == 0" class="iconfont iconquanping" @click.stop.prevent="getFullCreeen()"></i>
-                    <i v-else class="iconfont icontuichuquanping2-copy" @click.stop.prevent="getFullCreeen()"></i>
+
                 </div>
 
                 <div class="header-right pcHide">
@@ -247,88 +94,105 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
+            </el-header>
 
-                <!-- 系统运行信息 -->
-                <el-dialog :title="$t('home.dialog.sysTemInfo')" class="systemInformation_main" :visible.sync="curveShowCurve" @close="onCloseCurve" width="600px" top="10vh" center>
-                    <div class="systemInformation">
-                        <!-- <header>系统运行信息</header> -->
-                        <div class="information_box">
-                            <div v-for="(item, index) in infoList" :key="index">
-                                <p class="inform_title">{{ item.title }}</p>
-                                <div class="inform_msg">
-                                    <p class="inform_link" v-for="(items, indexs) in item.value" :key="indexs">
-                                        <span class="inform_nm">{{
+            <!-- 系统运行信息 -->
+            <el-dialog :title="$t('home.dialog.sysTemInfo')" class="systemInformation_main" :visible.sync="curveShowCurve" @close="onCloseCurve" width="600px" top="30vh" center>
+                <div class="systemInformation">
+                    <div class="information_box">
+                        <div v-for="(item, index) in infoList" :key="index">
+                            <p class="inform_title">{{ item.title }}</p>
+                            <div class="inform_msg">
+                                <p class="inform_link" v-for="(items, indexs) in item.value" :key="indexs">
+                                    <span class="inform_nm">{{
                                                 items.Key
                                             }}</span>
-                                        <span :title="items.Value" class="inform_value">{{ items.Value }}</span>
-                                    </p>
-                                </div>
+                                    <span :title="items.Value" class="inform_value">{{ items.Value }}</span>
+                                </p>
                             </div>
                         </div>
                     </div>
-                </el-dialog>
+                </div>
+            </el-dialog>
 
-                <el-dialog class="editPassword" @close="inspectState" @closed="clearInput" :visible.sync="modal1" width="480px" top="28vh" :close-on-click-modal="false" :show-close="false" center>
-                    <div slot="title">
-                        <span class="el-dialog__title" style="line-height: 24px;font-size: 18px;">{{$t('home.dialog.changePassword')}}</span>
-                        <i style="position: absolute;top: 20px;right: 20px;line-height: 20px;font-size: 14px;color: #909399; cursor: pointer;" class="iconfont iconguanbi .el-dialog__headerbtn" @click.stop.prevent="modal1 = false"></i>
-                    </div>
-                    <el-form :model="changePwd" label-position="right" :class="{
+            <el-dialog class="editPassword" @close="inspectState" @closed="clearInput" :visible.sync="modal1" width="480px" top="28vh" :close-on-click-modal="false" :show-close="false" center>
+                <div slot="title">
+                    <span class="el-dialog__title" style="line-height: 24px;font-size: 18px;">{{$t('home.dialog.changePassword')}}</span>
+                    <i style="position: absolute;top: 20px;right: 20px;line-height: 20px;font-size: 14px;color: #909399; cursor: pointer;" class="iconfont iconguanbi .el-dialog__headerbtn" @click.stop.prevent="modal1 = false"></i>
+                </div>
+                <el-form :model="changePwd" label-position="left" label-width="80px" :class="{
                             changePasswordForm: true,
                             changePasswordForm_en: language == 'en-US'
                         }" :rules="rules" ref="changePasswordForm">
-                        <el-form-item :label="$t('home.dialog.originalPassword')" prop="oldPwd">
-                            <el-input v-model="changePwd.oldPwd" v-if="modal1" show-password></el-input>
-                        </el-form-item>
-                        <el-form-item :label="$t('home.dialog.newPassword')" prop="newPwd">
-                            <el-input v-model="changePwd.newPwd" v-if="modal1" show-password @change="pwdInputChange"></el-input>
-                        </el-form-item>
-                        <el-form-item :label="$t('home.dialog.confirmPassword')" prop="confPwd">
-                            <el-input v-model="changePwd.confPwd" v-if="modal1" show-password></el-input>
-                        </el-form-item>
-                    </el-form>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click.stop.prevent="modal1 = false">{{
+                    <el-form-item :label="$t('home.dialog.originalPassword')" prop="oldPwd">
+                        <el-input v-model="changePwd.oldPwd" v-if="modal1" show-password></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('home.dialog.newPassword')" prop="newPwd">
+                        <el-input v-model="changePwd.newPwd" v-if="modal1" show-password @change="pwdInputChange"></el-input>
+                    </el-form-item>
+                    <el-form-item :label="$t('home.dialog.confirmPassword')" prop="confPwd">
+                        <el-input v-model="changePwd.confPwd" v-if="modal1" show-password></el-input>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                    <el-button type="primary" plain @click.stop.prevent="modal1 = false">{{
                                 $t("publics.button.cancel")
                             }}</el-button>
-                        <el-button type="primary" @click.stop.prevent="changeCode()">{{ $t("publics.button.confirm") }}
-                        </el-button>
-                    </span>
-                </el-dialog>
-                <el-dialog id="quit" :title="$t('home.tips.sureToLogOut')" :visible.sync="modal2" width="350px" top="35vh" center>
-                    <span slot="footer" class="dialog-footer">
-                        <el-button @click.stop.prevent="modal2 = false">{{
+                    <el-button type="primary" @click.stop.prevent="changeCode()">{{ $t("publics.button.confirm") }}
+                    </el-button>
+                </span>
+            </el-dialog>
+            <el-dialog id="quit" :title="$t('home.tips.sureToLogOut')" :visible.sync="modal2" width="350px" top="35vh" center>
+                <span slot="footer" class="dialog-footer">
+                    <el-button type="primary" plain @click.stop.prevent="modal2 = false">{{
                                 $t("publics.button.cancel")
                             }}</el-button>
-                        <el-button @click.stop.prevent="quitLogin" type="danger" style="color: #ffffff">
-                            {{ $t("publics.button.confirm") }}</el-button>
-                    </span>
-                </el-dialog>
-            </el-header>
+                    <el-button @click.stop.prevent="quitLogin" type="danger" style="color: #ffffff">
+                        {{ $t("publics.button.confirm") }}</el-button>
+                </span>
+            </el-dialog>
 
             <!-- 面包屑导航菜单 -->
-            <div class="breadcrumb">
+            <div class="breadcrumb" v-if="!isTab">
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item>{{
                             $t("menuJson.home")
                         }}</el-breadcrumb-item>
-                    <el-breadcrumb-item v-for="(item, i) in breadcrumbList" :key="i" :to="{ path: item.item }" v-if="item.title != '首页'">{{ $t(item.title) }}</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="(item, i) in breadcrumbList" :key="i" :to="{ path: item.item }">{{ $t(item.title) }}</el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
-            <el-main class="container-main">
-                <!-- <transition name="slide-fade"> -->
-                <router-view :key="$route.fullPath"></router-view>
-                <!-- </transition> -->
+
+            <el-main class="container-main" v-if="!isTab">
+                <router-view :key="$route.fullPath" @setMenu="resetMenu"></router-view>
             </el-main>
+
+            <el-main class="container-main" v-if="isTab">
+                <router-view :key="$route.fullPath" v-if="isError" @setMenu="resetMenu"></router-view>
+                <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="tabClick" v-else>
+                    <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name" :route="item.route" :data-va="index">
+                        <template slot="label">
+                            <span class="el-icon-refresh-right" @click="refreshTab(index)" :class="{active: isActive}"></span>
+                            <span>{{item.title}}</span>
+                        </template>
+                        <router-view :key="item.route" @setMenu="resetMenu"></router-view>
+                    </el-tab-pane>
+                </el-tabs>
+            </el-main>
+
         </el-container>
     </el-container>
 </template>
 
 <script>
-
+import asideMenu from 'gw-base-components-plus/asideMenu/menu.vue';
 export default {
+    components: {
+        asideMenu
+    },
     data () {
         return {
+            currentDate: '2021-06-01',
+
             smallImg: 'static/Images/logo.png',
             bigImg: 'static/Images/logos0-qh.png',
             menu: [],
@@ -360,7 +224,19 @@ export default {
 
             // 系统信息显示隐藏
             curveShowCurve: false,
-            infoList: [],
+            infoList: [{
+                "title": "系统运行平台",
+                "value": [
+                    {
+                        "Key": "网关服务版本号",
+                        "Value": "x.x.x"
+                    },
+                    {
+                        "Key": "Web程序版本号",
+                        "Value": "x.x.x"
+                    }
+                ]
+            }],
 
             // 登录者姓名
             loginUsername: window.sessionStorage.userName,
@@ -407,7 +283,20 @@ export default {
             delayTime: 5000,
             exportSignalrConnection: null,
             noPermission: false,
-            islightStyle: localStorage.getItem('theme') === 'light'
+            islightStyle: localStorage.getItem('theme') === 'light',
+
+            // 标签页数组和当前选中值
+            editableTabsValue: '',
+            editableTabs: [],
+
+            // 接口是否报错
+            isError: false,
+
+            // 刷新按钮状态
+            isActive: false,
+
+            // 是否使用标签页
+            isTab: false
         };
     },
 
@@ -452,23 +341,23 @@ export default {
             this.$i18n.locale = 'zh-CN';
         }
 
+        if (sessionStorage.menuActive) {
+            this.menuActive = sessionStorage.menuActive;
+        }
         this.init();
         this.getUserInfo();
         this.getUserName2SF();
     },
     mounted () {
-
-        if (sessionStorage.menuActive) {
-            this.menuActive = sessionStorage.menuActive;
-        }
-        if (localStorage.breadcrumbList) {
-            this.breadcrumbList = JSON.parse(localStorage.breadcrumbList);
+        if (!this.isTab) {
+            if (localStorage.breadcrumbList) {
+                this.breadcrumbList = JSON.parse(localStorage.breadcrumbList);
+            }
         }
         if (localStorage.historicalList) {
             this.historicalList = JSON.parse(localStorage.historicalList);
         }
 
-        // document.title = this.$t('login.documentTitle');
         if (
             window.sessionStorage.passwordPolicy &&
             window.sessionStorage.passwordPolicy == 1
@@ -478,7 +367,7 @@ export default {
 
         this.Axios({
             methed: 'get',
-            url: '../../../../static/json/config.json'
+            url: '/../../static/json/config.json'
         }).then(res => {
             let data = res.data;
             if (sessionStorage.languageSet === 'zh-CN') {
@@ -488,6 +377,7 @@ export default {
             }
             this.smallImg = data.img.indexSamllImg;
             this.bigImg = data.img.indexBigImg;
+            sessionStorage.isTab = this.isTab = data.labelPage;
         });
         window.document.documentElement.setAttribute('data-theme', this.theme)
     },
@@ -501,17 +391,39 @@ export default {
     },
     watch: {
         $route (to, from) {
-            this.menuActive = to.path;
-            sessionStorage.menuActive = to.path;
+            sessionStorage.menuActive = this.menuActive = to.path;
+
+            this.$nextTick(() => {
+                let activeDom = document.querySelector('.el-menu-item.is-active');
+                let title = activeDom ? activeDom.innerText : '';
+
+                if (!this.isTab) {
+                    this.breadcrumbList = [
+                        {
+                            title: title,
+                            path: sessionStorage.menuActive
+                        }
+                    ];
+                    localStorage.breadcrumbList = JSON.stringify(this.breadcrumbList);
+                }
+                if (title && title != '') {
+                    this.setTableTabs(title);
+                }
+                // 设置标签页选中项状态和名称
+                let len = this.editableTabs.length;
+                for (let i = 0; i < len; i++) {
+                    if (this.$route.fullPath == this.editableTabs[i].route) {
+                        this.editableTabsValue = this.editableTabs[i].name;
+                        sessionStorage.menuActiveName = this.editableTabs[i].title;
+                        break;
+                    }
+                }
+            })
+
+
             clearTimeout(this.intevalObj);
             this.intevalObj = null;
 
-            // this.flagl = !this.flagl;
-            // if (this.flagl) {
-            //     window.document.documentElement.setAttribute('data-theme', 'theme1')
-            // } else {
-            //     window.document.documentElement.setAttribute('data-theme', 'theme2')
-            // }
             let that = this;
             if (this.iaHaveSnapshot && to.path.indexOf('/systemSnapshot') == -1) {
                 this.intevalObj = setTimeout(() => {
@@ -532,28 +444,80 @@ export default {
     },
 
     methods: {
+        resetMenu () {
+            this.getUserInfo();
+        },
 
-        // validatePass (rule, value, callback) {
-        //     let reg = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*()_+`\-={}:";'<>,.\/]).{8,30}/;
-        //     let regPwd2 = new RegExp('[\\u4E00-\\u9FFF]+', 'g');
-        //     let regPwd3 = /^[\S]*$/;
-        //     let wordLg = value.length;
-        //     if (value === '') {
-        //         callback(new Error(this.$t('home.tips.inputNewPassword')));
-        //     } else if (value == this.changePwd.oldPwd) {
-        //         callback(new Error(this.$t('home.tips.newTheSameOldPas')));
-        //     } else if (!reg.test(value)) {
-        //         callback(new Error(this.$t('home.tips.inputIncludes')));
-        //     } else if (wordLg > 30) {
-        //         callback(new Error(this.$t('home.tips.outRange')));
-        //     } else if (regPwd2.test(value)) {
-        //         callback(new Error(this.$t('home.tips.cannotChina')));
-        //     } else if (!regPwd3.test(value)) {
-        //         callback(new Error(this.$t('home.tips.cannotSpaces')));
-        //     } else {
-        //         callback();
-        //     }
-        // },
+        tabClick (event) {
+            let route = event.$attrs.route;
+            sessionStorage.menuActive = this.menuActive = route;
+            this.$router.push(route);
+        },
+
+        // 设置标签页
+        setTableTabs (title) {
+            let len = this.editableTabs.length;
+
+            // 判断标签页数组是否存在当前选中导航项
+            let isHave = this.editableTabs.some(item => {
+                return item.route == this.$route.fullPath;
+            })
+            // 如果不存在则增加一项进数组，存在则只做标签页选中
+            if (!isHave) {
+                this.editableTabs.push({
+                    title: title,
+                    route: this.$route.fullPath,
+                    name: len ? String(Number(this.editableTabs[len - 1].name) + 1) : '1'
+                })
+                len = this.editableTabs.length;
+                this.editableTabsValue = String(len);
+
+                if (len > 7) {
+                    this.editableTabs.shift();
+                }
+            } else {
+                for (let i = 0; i < len; i++) {
+                    if (this.$route.fullPath == this.editableTabs[i].route) {
+                        this.editableTabsValue = this.editableTabs[i].name;
+                        break;
+                    }
+                }
+            }
+            sessionStorage.menuActiveName = title;
+        },
+
+        // 关闭标签页
+        removeTab (targetName) {
+            let tabs = this.editableTabs;
+            let activeName = this.editableTabsValue;
+            if (activeName === targetName) {
+                tabs.forEach((tab, index) => {
+                    if (tab.name === targetName) {
+                        let nextTab = tabs[index + 1] || tabs[index - 1];
+                        if (nextTab) {
+                            activeName = nextTab.name;
+                            sessionStorage.menuActiveName = nextTab.title;
+                            sessionStorage.menuActive = this.menuActive = nextTab.route;
+                            this.$router.push(nextTab.route);
+                        }
+                    }
+                });
+            }
+
+            this.editableTabsValue = activeName;
+            this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+        },
+
+        // 刷新标签页
+        refreshTab (index) {
+            let iframe = document.getElementsByClassName('jumpIframe');
+            iframe[index].contentWindow.location.reload();
+
+            this.isActive = true;
+            setTimeout(() => {
+                this.isActive = false;
+            }, 500);
+        },
 
         getRule () {
             this.$api
@@ -693,73 +657,10 @@ export default {
             if (this.historicalList.length > 10) {
                 this.historicalList.pop();
             }
-            localStorage.historicalList = JSON.stringify(this.historicalList);
-        },
-
-        // 历史记录菜单点击事件
-        onHistorical (item) {
-            this.historical(item);
-            this.menuActive = item.route;
-
-            // if(!item.title === '首页') {
-            // }
-            this.breadcrumbList = [
-                {
-                    title: item.name,
-                    path: this.splitRouter(item.route)
-                }
-            ];
-            localStorage.breadcrumbList = JSON.stringify(this.breadcrumbList);
-
-            sessionStorage.menuActive = this.menuActive;
         },
 
         // 菜单点击事件
-        onRouters (type, item, grandpa, parent) {
-            this.historical(item);
-            this.breadcrumbList = [];
-            this.menuActive = item.route;
-
-            if (type === 1) {
-
-                // 一级菜单
-                this.breadcrumbList = [
-                    {
-                        title: item.name,
-                        path: this.splitRouter(item.route)
-                    }
-                ];
-            }
-            if (type === 2) {
-                this.breadcrumbList = [
-                    {
-                        title: grandpa.name,
-                        path: this.splitRouter(grandpa.route)
-                    },
-                    {
-                        title: item.name,
-                        path: this.splitRouter(item.route)
-                    }
-                ];
-            }
-            if (type === 3) {
-                this.breadcrumbList = [
-                    {
-                        title: grandpa.name,
-                        path: this.splitRouter(grandpa.route)
-                    },
-                    {
-                        title: parent.name,
-                        path: this.splitRouter(parent.route)
-                    },
-                    {
-                        title: item.name,
-                        path: this.splitRouter(item.route)
-                    }
-                ];
-            }
-            sessionStorage.menuActive = this.menuActive;
-            localStorage.breadcrumbList = JSON.stringify(this.breadcrumbList);
+        onRouters (type, data, el) {
         },
         handleOpen (key, keyPath) {
             console.log(key, keyPath);
@@ -784,17 +685,14 @@ export default {
                 .then(this.$nextTick)
                 .then(() => {
                     this.$notify({
+                        type: classNm,
                         title: title,
                         dangerouslyUseHTMLString: true,
                         message: h(
                             'p',
-                            {
-                                class: 'msgText'
-                            },
                             msg
                         ),
-                        customClass: classNm,
-                        onClick: _this.toRouter
+                        onClick: _this.toRouter,
                     });
                 });
         },
@@ -825,7 +723,7 @@ export default {
                                 case 10003:
                                 case 10004:
                                     title = this.$t('home.tips.faultSnapshot');
-                                    classNm = 'alarm';
+                                    classNm = 'error';
                                     break;
                                 case 2:
                                 case 3:
@@ -849,11 +747,11 @@ export default {
                                     break;
                                 case 10001:
                                     title = this.$t('home.tips.setSnapshot');
-                                    classNm = 'set';
+                                    classNm = 'info';
                                     break;
                                 case 10002:
                                     title = this.$t('home.tips.assetSnapshot');
-                                    classNm = 'ziChan';
+                                    classNm = 'info';
                                     break;
                                 default:
                                     title = this.$t(
@@ -895,24 +793,10 @@ export default {
         getUserInfo () {
             this.$api.GetMenus().then(res => {
                 if (res.data.code === 200) {
+                    this.isError = false;
 
                     this.menu = JSON.parse(JSON.stringify(res.data.data));
 
-                    // let allMenu = JSON.parse(JSON.stringify(res.data.data));
-                    // let modules = packages.name;
-                    // let menuItems = {}
-                    // modules.forEach(module => {
-                    //     let menuItem = allMenu.find(item => {
-                    //         if (JSON.stringify(item).indexOf(module) !== -1) {
-                    //             return item;
-                    //         }
-                    //         return false;
-                    //     })
-                    //     console.log(menuItems)
-                    //     console.log(menuItem.resourceId, '----')
-                    //     menuItems[menuItem.resourceId] = menuItem;
-                    // })
-                    // this.menu = Object.values(menuItems)
                     window.sessionStorage.asideList = JSON.stringify(this.menu);
                     if (this.menu.length > 0) {
                         this.iaHaveSnapshot = false;
@@ -921,18 +805,35 @@ export default {
                             this.iaHaveSnapshot = true;
                         }
 
+                        let route = sessionStorage.menuActive;
                         if (
                             window.sessionStorage.asideList &&
                             (this.$route.path == '/Index' ||
                                 this.$route.path == '/index/')
                         ) {
                             if ('children' in this.menu[0]) {
-                                this.$router.push(
-                                    this.menu[0].children[0].route
-                                );
+                                route = this.menu[0].children[0].route;
+                                this.$router.push(route);
+                                if (!sessionStorage.menuActiveName) {
+                                    sessionStorage.menuActiveName = this.$t(this.menu[0].children[0].name);
+                                }
                             } else {
-                                this.$router.push(this.menu[0].route);
+                                route = this.menu[0].route
+                                this.$router.push(route);
+                                if (!sessionStorage.menuActiveName) {
+                                    sessionStorage.menuActiveName = this.$t(this.menu[0].name);
+                                }
                             }
+                        }
+
+                        // 初始化第一个标签页
+                        if (this.editableTabs.length == 0) {
+                            this.editableTabs.push({
+                                title: sessionStorage.menuActiveName,
+                                route: route,
+                                name: '1'
+                            })
+                            this.editableTabsValue = '1';
                         }
                     }
                 } else {
@@ -940,10 +841,12 @@ export default {
                     window.sessionStorage.clear();
                     this.$message({
                         type: 'error',
-                        message: res.data.message
+                        title: res.data.message
                     });
                     this.$router.replace('/Login');
                 }
+            }).catch(er => {
+                this.isError = true;
             });
         },
 
@@ -961,26 +864,12 @@ export default {
             this.$api.getSystemInfo().then(rt => {
                 if (rt.status == 200) {
                     let infoList = [
-
-                        // {
-                        //     title: JSON.parse(rt.data.data.applicationRunInfo)
-                        //         .Item1,
-                        //     value: JSON.parse(rt.data.data.applicationRunInfo)
-                        //         .Item2
-                        // },
                         {
                             title: JSON.parse(rt.data.data.systemPlatformInfo)
                                 .Item1,
                             value: JSON.parse(rt.data.data.systemPlatformInfo)
                                 .Item2.slice(-2)
                         }
-
-                        // {
-                        //     title: JSON.parse(rt.data.data.systemRunEvnInfo)
-                        //         .Item1,
-                        //     value: JSON.parse(rt.data.data.systemRunEvnInfo)
-                        //         .Item2
-                        // }
                     ];
                     this.infoList = infoList;
                 }
@@ -988,7 +877,6 @@ export default {
         },
 
         inspectState () {
-            console.log(window.sessionStorage.passwordPolicy && window.sessionStorage.passwordPolicy == 1)
             if (
                 window.sessionStorage.passwordPolicy &&
                 window.sessionStorage.passwordPolicy == 1
@@ -996,7 +884,6 @@ export default {
                 this.modal1 = true;
                 this.$message.warning('密码过期，请修改密码');
             }
-            console.log(this.modal1)
         },
 
         // 清空输入的密码
@@ -1070,8 +957,6 @@ export default {
                         } else {
                             this.$message.error(
                                 rt.data.message
-
-                                // this.$t("publics.tips.editFail")
                             );
                         }
                     });
@@ -1098,8 +983,6 @@ export default {
                         if (isSsoLogin == null || isSsoLogin == undefined || !isSsoLogin) {
                             this.$router.replace('/Login');
                         } else {
-
-                            // window.location.href = '/loginOut.html';
                             this.$router.replace('/ssoLogout');
                         }
                     }
@@ -1184,12 +1067,15 @@ export default {
             }
             localStorage.setItem('theme', this.theme)
             window.document.documentElement.setAttribute('data-theme', this.theme);
-            document.querySelector('iframe').contentWindow.document.documentElement.setAttribute('data-theme', this.theme);
-            let iframe = document.getElementById('jumpIframe').contentWindow;
-            iframe.postMessage({ theme: this.theme });
+
+            let iframe = document.getElementsByClassName('jumpIframe');
+            for (let item of iframe) {
+                item.contentWindow.document.documentElement.setAttribute('data-theme', this.theme);
+                item.contentWindow.postMessage({ theme: this.theme })
+            }
         }
     }
 };
 </script>
 
-<style lang="scss" src="gw-base-style/index.scss" scoped></style>
+<style lang="scss" src="gw-base-style-plus/index.scss" scoped></style>

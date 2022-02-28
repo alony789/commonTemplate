@@ -10,14 +10,20 @@
     "img": {
         "loginImg": "../../../static/Images/logoWord.png",
         "loginFooterImg": "../../../static/Images/logo.png",
-        "indexBigImg": "../../static/Images/logos0-qh.png",
+        "indexBigImg": "../../static/Images/logos0-qh.svg",
         "indexSamllImg": "../../static/Images/logo.png"
     },
     "versionConversion": false,
     "theme": "dark",
+    "labelPage": true,
+    "enabledSsoUrl": true,
+    "ssoUrl": {
+        "api": "/jdsso/ssourl",
+        "method": "get"
+    },
     "ssoLogin": {
-        "api": "/api/njzc/sso",
-        "method": "post",
+        "api": "/jdsso/ssologin",
+        "method": "get",
         "url": "/"
     }
 }

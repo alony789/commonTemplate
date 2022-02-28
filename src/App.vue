@@ -24,7 +24,7 @@ html {
 
 html body {
     height: 100%;
-    font-family: "Microsoft YaHei";
+    font-family: 'Microsoft YaHei';
     overflow: hidden;
 }
 a:focus,
@@ -189,7 +189,7 @@ html body div {
     padding-right: 10px;
 }
 
-.el-notification {
+/* .el-notification {
     border: none;
     background-color: rgba(49, 55, 71, 0.88);
     padding: 0;
@@ -216,7 +216,7 @@ html body div {
     line-height: 14px;
     margin-top: 0;
     margin-bottom: 16px;
-}
+} */
 
 .el-notification .el-notification__content .msgText {
     color: rgba(240, 244, 255, 0.64);

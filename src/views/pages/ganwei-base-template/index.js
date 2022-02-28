@@ -10,15 +10,14 @@ import Axios from "axios";
 import App from "./App";
 
 import router from "./router.js";
-import myUtils from "gw-base-utils/myUtils";
+import myUtils from "gw-base-utils-plus/myUtils";
 import api from "./src/request/api";
-import getCode from "gw-base-api/encrypt.js";
-import moment from "moment";
+import getCode from "gw-base-api-plus/encrypt.js";
 
-import "gw-base-style/elementStyleReset/index.css";
-import "gw-base-style/elementStyleReset/reset.scss";
-import "gw-base-style/style.scss";
-import "gw-base-font/iconfont.css";
+import "gw-base-style-plus/elementStyleReset/index.css";
+import "gw-base-style-plus/elementStyleReset/reset.scss";
+import "gw-base-style-plus/style.scss";
+import "gw-base-font-plus/iconfont.css";
 
 //中英文切换
 import VueI18n from "vue-i18n";
@@ -46,7 +45,6 @@ Vue.config.productionTip = false;
 Vue.prototype.Axios = Axios;
 
 Vue.prototype.$Store = store;
-Vue.prototype.$moment = moment;
 
 /* 将 getCode 挂载到 vue 的原型上 */
 Vue.prototype.$getCode = getCode;
