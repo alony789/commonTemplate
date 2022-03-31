@@ -42,6 +42,7 @@ const PORT = process.env.PORT && Number(process.env.PORT);
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // 获取模块名列表
 const moduleList = require("./module-conf");
+_env.FILES_ENV = JSON.stringify(moduleList)
 let arr = [];
 for (let module of moduleList.moduleList) {
     arr.push(
@@ -117,7 +118,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             // 如果这个选项为true，会以轮询的方式检查我们的文件的变动，效率不好
             poll: config.dev.poll
         },
-        before(app) {
+        before (app) {
             app.get("/*.js", (req, res, next) => {
                 const result = req.url.match(/[^/]+?(?=\.)/);
                 const pageName = result && result[0];

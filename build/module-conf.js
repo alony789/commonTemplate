@@ -11,9 +11,10 @@ var moduleSrcArray = glob.sync(src);
 for (var x in moduleSrcArray) {
     moduleList.push(moduleSrcArray[x].split("/").pop());
 }
+// process.env.FILES_ENV = JSON.stringify(moduleList)
 console.log("File List", moduleList);
 // 检测是否在输入的参数是否在允许的list中
-var checkModule = function() {
+var checkModule = function () {
     var module = process.env.MODULE_ENV;
     // 检查moduleList是否有重复
     var hash = {};
@@ -47,7 +48,7 @@ var checkModule = function() {
 };
 
 // 获取当前要打包的模块列表
-function getModuleToBuild() {
+function getModuleToBuild () {
     let moduleToBuild = [];
     if (process.env.NODE_ENV === "production") {
         /* 部署态，构建要打包的模块列表，如果指定了要打包的模块，那么按照指定的模块配置入口
@@ -65,6 +66,13 @@ function getModuleToBuild() {
     }
     return moduleToBuild;
 }
+// try {
+//     const fs = require("fs");
+//     let obj = { name: moduleList };
+//     fs.writeFileSync(process.env.MODULENAMES_ENV, JSON.stringify(obj));
+// } catch (e) {
+//     console.log(e);
+// }
 exports.moduleList = moduleList;
 exports.checkModule = checkModule;
 exports.getModuleToBuild = getModuleToBuild;

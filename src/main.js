@@ -1,7 +1,8 @@
 /* eslint-disable */
 import Vue from "vue";
 import Element from "element-ui";
-import "element-ui/lib/theme-chalk/display.css";
+// import "element-ui/lib/theme-chalk/index.css";
+// import "element-ui/lib/theme-chalk/display.css";
 import store from "./store";
 import Axios from "axios";
 import App from "./App";
@@ -9,10 +10,10 @@ import router from "./router";
 import myUtils from "gw-base-utils-plus/myUtils";
 import api from "gw-base-api-plus/api";
 import getCode from "gw-base-api-plus/encrypt.js";
-import "gw-base-style-plus/elementStyleReset/index.css";
+// import "gw-base-style-plus/elementStyleReset/index.css";
 import "gw-base-style-plus/elementStyleReset/reset.scss";
 import "gw-base-style-plus/style.scss";
-import "gw-base-font-plus/iconfont.css";
+// import "gw-base-font-plus/iconfont.css";
 
 import loadMore from "gw-base-components-plus/loadMore/loadMore";
 import globalVariable from "gw-base-utils-plus/globalVariable.js";

@@ -2,8 +2,8 @@
 import Vue from "vue";
 import Element from "element-ui";
 
-import "element-ui/lib/theme-chalk/index.css";
-import "element-ui/lib/theme-chalk/display.css";
+// import "element-ui/lib/theme-chalk/index.css";
+// import "element-ui/lib/theme-chalk/display.css";
 
 import store from "@/store";
 import Axios from "axios";
@@ -14,10 +14,10 @@ import myUtils from "gw-base-utils-plus/myUtils";
 import api from "./src/request/api";
 import getCode from "gw-base-api-plus/encrypt.js";
 
-import "gw-base-style-plus/elementStyleReset/index.css";
+// import "gw-base-style-plus/elementStyleReset/index.css";
 import "gw-base-style-plus/elementStyleReset/reset.scss";
 import "gw-base-style-plus/style.scss";
-import "gw-base-font-plus/iconfont.css";
+// import "gw-base-font-plus/iconfont.css";
 
 //中英文切换
 import VueI18n from "vue-i18n";

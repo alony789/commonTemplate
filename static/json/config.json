@@ -11,7 +11,20 @@
         "loginImg": "../../../static/Images/logoWord.png",
         "loginFooterImg": "../../../static/Images/logo.png",
         "indexBigImg": "../../static/Images/logos0-qh.svg",
-        "indexSamllImg": "../../static/Images/logo.png"
+        "indexSamllImg": "../../static/Images/logo.png",
+        "indexBigImgLight": "../../static/Images/gw-logo-light.svg"
+    },
+    "frameIcon" : {
+        "fullScreen":  "../../static/Images/fullScreen.svg",
+        "fullScreenLight": "../../static/Images/Full_screen_pic.png",
+        "outFullScreeen": "../../static/Images/gw-icon-tuchuquanping.svg",
+        "skin": "../../static/Images/skin.svg",
+        "skinLight": "../../static/Images/skinlight.svg"
+    },
+    "frameLayout" : {
+        "Header": true,
+        "NavMenu": true,
+        "innerIFrame": true
     },
     "versionConversion": false,
     "theme": "dark",

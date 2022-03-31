@@ -22,4 +22,6 @@ package-lock.json
 /build/dev-entries/
 
 /src/views/ganwei-*
+/src/views/gw-*
 /src/views/nobase
+/src/views/pages/

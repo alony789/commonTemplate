@@ -31,31 +31,14 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // 引入用于生产环境的一些基本变量
 const env = require("../config/prod.env");
 
-// if(process.env.NODE_ENV_ALL === 'proAll'){
-//     // 获取所有模块列表
-//     const moduleToBuild = require('./module-conf').getModuleToBuild() || []
-//     // 组装多个（有几个module就有几个htmlWebpackPlugin）htmlWebpackPlugin，然后追加到配置中
-//     const htmlWebpackPlugins = []
-//     // 一起打包时是通过多入口实现的，所以要配置多个htmlPlugin
-//     for (let module of moduleToBuild) {
-//         htmlWebpackPlugins.push(new HtmlWebpackPlugin({
-//             filename: `${module}.html`,
-//             template: `./src/modules/${module}/index.html`,
-//             inject: true,
-//             // 这里要指定把哪些chunks追加到html中，默认会把所有入口的chunks追加到html中，这样是不行的
-//             chunks: ['vendor', 'manifest', module],
-//             minify: {
-//                 removeComments: true,
-//                 collapseWhitespace: true,
-//                 removeAttributeQuotes: true
-//                     // more options:
-//                     // https://github.com/kangax/html-minifier#options-quick-reference
-//             },
-//             // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-//             chunksSortMode: 'dependency'
-//         }))
-//     }
-// }
+const staticCopy = new CopyWebpackPlugin([
+    {
+        // 定义要拷贝的资源的源目录
+        from: path.resolve(__dirname, "../static"),
+        // 定义要拷贝的资源的目标目录
+        to: config.build.assetsSubDirectory,
+    }
+])
 
 // 合并公共配置和生产环境独有的配置并返回一个用于生产环境的webpack配置文件
 const webpackConfig = merge(baseWebpackConfig, {
@@ -189,19 +172,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 
         // copy custom static assets
         // 拷贝静态资源到build文件夹中 process.env.NODE_ENV_ALL === 'proAll'?'':
-        new CopyWebpackPlugin([
-            {
-                // 定义要拷贝的资源的源目录
-                from: path.resolve(__dirname, "../static"),
-                // 定义要拷贝的资源的目标目录
-                to: config.build.assetsSubDirectory,
-                // 忽略拷贝指定的文件，可以使用模糊匹配
-                ignore:
-                    process.env.NODE_ENV_ALL === "proAll"
-                        ? [".*", "font/*", "Images/*", "Images/autoPlayImg/*"]
-                        : [".*", "font/*"] //
-            }
-        ])
+        process.env.NODE_ENV_ALL === "proAll" ? new CopyWebpackPlugin() : staticCopy
     ]
 });
 

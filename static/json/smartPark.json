@@ -1,0 +1,665 @@
+{
+    "smartParkData": [
+        {
+            "title": "智慧园区",
+            "subtitle": "Smart Park",
+            "class": "gw_yq",
+            "img": "/static/Images/smartPark_yq.png",
+            "subPageImg": "/static/Images/smartPark_yq_top.png",
+            "children": [
+                {
+                    "name": "首页",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "112",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧安全",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "113",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧出行",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "114",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧能源",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "115",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧照明",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "116",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧服务",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "117",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧设施",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "118",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧工单",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "401",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "三维全景",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "100",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "综合态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "202",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "安全态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "203",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null,
+                    "childrend": [
+                        {
+                            "name": "第一个人轨迹",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "218",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "第二个人轨迹",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "219",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "第三个人轨迹",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "220",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "全景摄像机1号位",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "301",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "全景摄像机2号位",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "302",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "全景摄像机3号位",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "303",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "全景摄像机4号位",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "304",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "全景摄像机5号位",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "305",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "视频巡更",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "209",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        }
+                    ]
+                },
+                {
+                    "name": "人员态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "204",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "车辆态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "205",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null,
+                    "childrend": [
+                        {
+                            "name": "寻找第一辆车",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "215",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "寻找第二辆车",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "216",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        },
+                        {
+                            "name": "寻找第三辆车",
+                            "name_en": "Lecong environmental protection",
+                            "icon": "iconfont icon-sceneNew",
+                            "equipNo": "20022",
+                            "setNo": "217",
+                            "color": "#d7b1ea,#a40df3",
+                            "value": null
+                        }
+                    ]
+                },
+                {
+                    "name": "能源态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "206",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "设备态势",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20022",
+                    "setNo": "207",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "工业互联网",
+            "subtitle": "Industrial Internet",
+            "class": "gw_gy",
+            "img": "/static/Images/smartPark_gy.png",
+            "subPageImg": "/static/Images/smartPark_gy_top.png",
+            "children": [
+                {
+                    "name": "智慧制造首页",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "1",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "智慧制造园区",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "2",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "智慧园区制造",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "3",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧制造产线",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "4",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧产品业务",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "5",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧园区数据",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20023",
+                    "setNo": "6",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "智慧环保",
+            "subtitle": "Smart and environmental protection",
+            "class": "gw_hb",
+            "img": "/static/Images/smartPark_hb.png",
+            "subPageImg": "/static/Images/smartPark_hb_top.png",
+            "children": [
+                {
+                    "name": "水质监测",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20021",
+                    "setNo": "1",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "水闸报警",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20021",
+                    "setNo": "2",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "河段信息",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20021",
+                    "setNo": "3",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "扬尘信息",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20021",
+                    "setNo": "4",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "智慧镇街",
+            "subtitle": "Data Monitoring Center",
+            "class": "gw_sj",
+            "img": "/static/Images/smartPark_widTown.png",
+            "subPageImg": "/static/Images/smartPark_widTown_top.png",
+            "children": [
+                {
+                    "name": "镇街首页",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "20",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "城市管理",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "21",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "治安防控",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "22",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "山林防火",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "23",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "生态环境",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "24",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "国土资源",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "25",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "水利保护",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20025",
+                    "setNo": "26",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "智慧路灯",
+            "subtitle": "Smart Street Light",
+            "class": "gw_ld",
+            "img": "/static/Images/smartPark_ld.png",
+            "subPageImg": "/static/Images/smartPark_ld_top.png",
+            "children": [
+                {
+                    "name": "智慧灯杆首页",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "11",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "GIS地图",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "1",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "大数据",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "4",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "环境监测",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "3",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "微基站+充电桩",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "5",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "控制箱+WIFI",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20026",
+                    "setNo": "6",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "智慧电网",
+            "subtitle": "Smart Grid Control",
+            "class": "gw_dw",
+            "img": "/static/Images/smartPark_dw.png",
+            "subPageImg": "/static/Images/smartPark_dw_top.png",
+            "children": [
+                {
+                    "name": "隧道烟雾、电流监测",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "5",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "气体-井监测",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "6",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "隧道放电-监控",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "8",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "变电站-风电",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "9",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "风机系统",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "10",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "变电站-灯光",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "7",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "空调监测-红外",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20024",
+                    "setNo": "4",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        },
+        {
+            "title": "生态合作",
+            "subtitle": "Smart Sports",
+            "class": "gw_Sports",
+            "img": "/static/Images/smartPark_ECCO.png",
+            "subPageImg": "/static/Images/smartPark_ECCO_top.png",
+            "children": [
+                {
+                    "name": "智慧体育1",
+                    "name_en": "Return software",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "1",
+                    "color": "#8bc3ef,#3c81b7",
+                    "value": null
+                },
+                {
+                    "name": "智慧体育2",
+                    "name_en": "Intelligent building",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "2",
+                    "color": "#d49ca8,#f50538",
+                    "value": null
+                },
+                {
+                    "name": "智慧体育3",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "3",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧体育4",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "4",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧体育5",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "5",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "智慧体育6",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "6",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "疫情防控",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "7",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "人员测温",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "8",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                },
+                {
+                    "name": "人员统计",
+                    "name_en": "Lecong environmental protection",
+                    "icon": "iconfont icon-sceneNew",
+                    "equipNo": "20027",
+                    "setNo": "9",
+                    "color": "#d7b1ea,#a40df3",
+                    "value": null
+                }
+            ]
+        }
+    ]
+}

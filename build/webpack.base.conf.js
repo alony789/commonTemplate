@@ -14,6 +14,55 @@ const config = require("../config");
 const vueLoaderConfig = require("./vue-loader.conf");
 const glob = require("glob");
 
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
+
+const copyPlugins = new CopyWebpackPlugin(
+    [
+        {
+            from: path.resolve(__dirname, "../node_modules/vue/dist/vue.min.js"),
+            to: path.resolve(__dirname, "../dist/static/js"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/vue-i18n/dist/vue-i18n.min.js"),
+            to: path.resolve(__dirname, "../dist/static/js"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/vue-router/dist/vue-router.min.js"),
+            to: path.resolve(__dirname, "../dist/static/js"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/vuex/dist/vuex.min.js"),
+            to: path.resolve(__dirname, "../dist/static/js"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/element-ui/lib/index.js"),
+            to: path.resolve(__dirname, "../dist/static/js/element-ui"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/axios/dist/axios.min.js"),
+            to: path.resolve(__dirname, "../dist/static/js"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/gw-base-style-plus/elementStyleReset/index.css"),
+            to: path.resolve(__dirname, "../dist/static/css/element-ui"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/gw-base-style-plus/elementStyleReset/fonts/*"),
+            to: path.resolve(__dirname, "../dist/static/fonts/[name].[ext]"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/gw-base-font-plus/iconfont.css"),
+            to: path.resolve(__dirname, "../dist/static/css/"),
+        },
+        {
+            from: path.resolve(__dirname, "../node_modules/gw-base-font-plus/*"),
+            to: path.resolve(__dirname, "../dist/static/fonts/[name].[ext]"),
+            ignore: ['*.js', '*.css', '*.json']
+        }
+    ]
+);
+
 const moduleList = require("./module-conf");
 
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
@@ -107,6 +156,40 @@ module.exports = {
                 ? config.build.assetsPublicPath
                 : config.dev.assetsPublicPath
     },
+
+    // 公共包通过外部引用
+    externals: {
+        'vue': 'Vue',
+        'element-ui': 'ELEMENT',
+        'vue-router': 'VueRouter',
+        'axios': 'axios',
+        'vuex': 'Vuex',
+        'vue-i18n': 'VueI18n'
+    },
+
+    plugins: [
+        // 在index.html添加公共包引用地址
+        new HtmlWebpackTagsPlugin({
+            usePublicPath: false,
+            scripts: [
+                '/static/js/vue.min.js',
+                '/static/js/vue-i18n.min.js',
+                '/static/js/vue-router.min.js',
+                '/static/js/vuex.min.js',
+                '/static/js/element-ui/index.js',
+                '/static/js/axios.min.js'
+            ], 
+            links: [
+                '/static/css/element-ui/index.css',
+                '/static/css/iconfont.css'
+            ],
+            append: false
+        }),
+
+        // 复制打包的公共包到静态资源地址
+        process.env.NODE_ENV_ALL === 'proALL' ? new CopyWebpackPlugin() : copyPlugins
+    ],
+
     // 配置模块解析时候的一些选项
     resolve: {
         // 指定哪些类型的文件可以引用的时候省略后缀名
@@ -165,7 +248,7 @@ module.exports = {
                     // 生成的文件的保存路径和后缀名称
                     publicPath:
                         process.env.NODE_ENV_ALL == "proAll" ? "./" : "/",
-                    name: utils.assetsPath("img/[name].[hash:7].[ext]")
+                    name: utils.assetsPath("img/[name].[ext]")
                 }
             },
             {
@@ -199,13 +282,6 @@ module.exports = {
             }
         ]
     },
-    // 用ProvidePlugin进行实例初始化后，jquery就会被自动加载并导入对应的node模块中
-    plugins: [
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
-    ],
     // 这些选项用于配置polyfill或mock某些node.js全局变量和模块。
     // 这可以使最初为nodejs编写的代码可以在浏览器端运行
     node: {
