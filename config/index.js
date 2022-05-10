@@ -157,17 +157,13 @@ module.exports = {
     // 生产编译环境下的一些基本配置
     build: {
         // html文件的生成的地方,
-        index:
-            process.env.NODE_ENV_ALL === "proAll"
-                ? path.resolve(__dirname, "../dist", MODULE, "index.html")
-                : path.resolve(__dirname, "../dist/index.html"),
+        index: process.env.NODE_ENV_ALL === "proAll" ?
+            path.resolve(__dirname, "../dist", MODULE, "index.html") : path.resolve(__dirname, "../dist/index.html"),
 
         // Paths
         // 编译生成的文件的目录path.resolve(__dirname, '../dist'),
-        assetsRoot:
-            process.env.NODE_ENV_ALL === "proAll"
-                ? path.resolve(__dirname, "../dist", MODULE)
-                : path.resolve(__dirname, "../dist/"),
+        assetsRoot: process.env.NODE_ENV_ALL === "proAll" ?
+            path.resolve(__dirname, "../dist", MODULE) : path.resolve(__dirname, "../dist/"),
 
         // 编译生成的静态文件的目录
         assetsSubDirectory: "static",

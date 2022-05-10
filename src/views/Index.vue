@@ -15,24 +15,6 @@
                     <div class="left-nav" :class="{noHeader: !frameLayout.Header}" @click.stop>
                         <!-- 新版导航菜单 -->
                         <el-row class="list">
-                            <!-- <div class="historical">
-                                <el-dropdown v-if="historicalList.length > 0">
-                                    <p class="title">
-                                        <i class="iconfont iconlishijilu"></i>
-                                        <span v-show="!isCollapse">{{
-                                                $t("menuJson.history")
-                                            }}</span>
-                                    </p>
-                                    <el-dropdown-menu style="padding: 10px; margin-top: -5px" slot="dropdown">
-                                        <p class="index-historical" @click="onHistorical(item)" v-for="(item, i) in historicalList" :key="i" type="default" style="font-size: 14px; cursor: pointer; padding: 10px 0">
-                                            <router-link :to="{ path: item.route }">
-                                                <i class="iconfont" :class="item.icon"></i>
-                                                <span>{{ $t(item.name) }}</span>
-                                            </router-link>
-                                        </p>
-                                    </el-dropdown-menu>
-                                </el-dropdown>
-                            </div> -->
                             <div class="max">
                                 <el-menu ref="menu" :router="true" :default-active="menuActive" @select="onRouters" :collapse='isCollapse' :collapse-transition='false'>
                                     <asideMenu v-for="item in menu" :data="item" :key="item.resourceId"></asideMenu>
@@ -41,9 +23,6 @@
                         </el-row>
                         <div class="fold">
                             <div @click.stop.prevent="onAsideListShow()" :class="menuOverflow">
-                                <!-- <el-tooltip class="item" effect="dark" :content="
-                                        $t('menuJson.collapseNavigationBar')
-                                    " placement="right"> -->
                                 <el-button>
                                     <i :class="
                                                 isCollapse
@@ -51,7 +30,6 @@
                                                     : 'iconfont icon-caidan_zhankai isopen'
                                             "></i>
                                 </el-button>
-                                <!-- </el-tooltip> -->
                                 <span v-show="!isCollapse && isCollapseText">{{
                                         $t("menuJson.closeNavigationBar")
                                     }}</span>
@@ -77,40 +55,16 @@
                 <a href="#" @click.stop.prevent="onAsideListShow()">
                     <i class="iconfont iconcebianlanzhankai"></i>{{ $t("home.workbench") }}</a>
                 <div class="header-right displayNone">
-                    <!-- <el-dropdown class="index-header-right">
-                        <span class="el-dropdown-link index-header-right">
-                            <i class="iconfont icon_xieyiqiehuan"></i>
-                        </span>
-                        <el-dropdown-menu style="padding: 10px; margin-top: -10px" slot="dropdown" class="dropdownMenu">
-                            <p @click="checkStyle('dark')" style="padding-bottom: 15px;cursor: pointer;">暗</p>
-                            <p @click="checkStyle('light')" style="cursor: pointer;">亮</p>
-                        </el-dropdown-menu>
-
-                    </el-dropdown> -->
-
                     <div>
                         <img v-if="n % 2 == 0 && !islightStyle" :src="fullScreenImg" alt="" @click.stop.prevent="getFullCreeen()">
                         <img v-else-if="n % 2 == 0 && islightStyle" :src="fullScreenLightImg" @click.stop.prevent="getFullCreeen()" alt="">
                         <!-- <i v-if="n % 2 == 0" class="iconfont iconquanping" @click.stop.prevent="getFullCreeen()"></i> -->
                         <img v-else :src="outFullScreeenImg" @click.stop.prevent="getFullCreeen()" alt="">
                     </div>
-
-                    <!-- <el-dropdown trigger="click">
-                        <el-badge :value="totalMessage" class="item">
-                            <img src="/static/Images/message.svg" alt="">
-                        </el-badge>
-                        <el-dropdown-menu class="msg-dropdown" style="padding: 0 10px;" slot="dropdown">
-                            123456789
-                        </el-dropdown-menu>
-                    </el-dropdown> -->
-                    <!-- <unread :totalMessage="totalMessage" :messageList='messageList' @jump="toRouter"></unread> -->
-
                     <div class="themeImage" @click="checkStyle(islightStyle)">
                         <img :src="skinLightImg" alt="" v-if="islightStyle">
                         <img :src="skinImg" alt="" v-else>
                     </div>
-
-                    <!-- <el-avatar :src="'/static/Images/user.svg'">{{ loginUn }}</el-avatar> -->
                     <el-dropdown class="index-header-right">
                         <el-avatar v-if="theme === 'dark'" :src="'/static/Images/user1.svg'" shape="square"></el-avatar>
                         <el-avatar v-else :src="'/static/Images/user.svg'" shape="square"></el-avatar>
@@ -131,7 +85,6 @@
                     </el-dropdown>
                     <span class="el-dropdown-link index-header-right">
                         {{ loginUsername }}
-                        <!-- <i class="iconfont iconxiajiantou"></i> -->
                     </span>
 
                 </div>
@@ -161,7 +114,6 @@
             <!-- 系统运行信息 -->
             <el-dialog :title="$t('home.dialog.sysTemInfo')" class="systemInformation_main" :visible.sync="curveShowCurve" @close="onCloseCurve" width="600px" top="30vh" center>
                 <div class="systemInformation">
-                    <!-- <header>系统运行信息</header> -->
                     <div class="information_box">
                         <div v-for="(item, index) in infoList" :key="index">
                             <p class="inform_title">{{ item.title }}</p>
@@ -248,11 +200,9 @@
 
 <script>
 import asideMenu from 'gw-base-components-plus/asideMenu/menu.vue';
-// import unread from 'gw-base-components-plus/unreadMsg/unread.vue';
 export default {
     components: {
         asideMenu
-        // , unread
     },
     data () {
         return {
