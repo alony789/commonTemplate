@@ -17,13 +17,13 @@
 
         img {
             position: fixed;
-            right: 0px;
-            bottom: 0px;
+            right: 50%;
+            bottom: 50%;
             min-width: 100%;
             min-height: 100%;
             height: auto;
             width: auto;
-            background-size: 100% 100%;
+            transform: translate(50%, 50%);
         }
 
         /*加滤镜*/
@@ -39,7 +39,7 @@
     }
 
     /deep/ .el-form {
-        @include background_color('con-bgColor4');
+        @include background_color("con-bgColor4");
         padding-top: 30px;
 
         position: fixed;
@@ -50,10 +50,9 @@
         transform: translate(-50%, -50%);
 
         &-item {
-
             &__label {
                 font-size: 16px;
-                @include font_color('con-textColor1');
+                @include font_color("con-textColor1");
             }
 
             .el-input__inner {
@@ -77,9 +76,9 @@
             .el-button--default {
                 width: 350px;
                 background-color: transparent !important;
-                @include font_color('con-textColor1');
+                @include font_color("con-textColor1");
                 border: 0.5px solid;
-                @include border_color('bor-default');
+                @include border_color("bor-default");
             }
 
             .el-button--primary {
@@ -95,7 +94,6 @@
         justify-content: center;
         overflow: auto;
         @include firefoxScroll;
-
 
         .el-dialog {
             margin-top: 0vh !important;

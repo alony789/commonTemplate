@@ -1,6 +1,7 @@
 <template>
     <el-container id="index">
-        <div class="mask" @click.stop.prevent="onAsideListShow()" :class="{ displayNone: isCollapse }" v-if="frameLayout.NavMenu">
+        <div class="mask" @click.stop.prevent="onAsideListShow()" :class="{ displayNone: isCollapse }"
+            v-if="frameLayout.NavMenu">
             <transition name="draw">
                 <el-aside class="maxW" :class="maxWActive">
                     <div class="aside-header" v-if="frameLayout.Header">
@@ -12,27 +13,50 @@
                             </router-link>
                         </div>
                     </div>
-                    <div class="left-nav" :class="{noHeader: !frameLayout.Header}" @click.stop>
+                    <div class="left-nav" :class="{ noHeader: !frameLayout.Header }" @click.stop>
                         <!-- 新版导航菜单 -->
                         <el-row class="list">
+                            <!-- <div class="historical">
+                                <el-dropdown v-if="historicalList.length > 0">
+                                    <p class="title">
+                                        <i class="iconfont iconlishijilu"></i>
+                                        <span v-show="!isCollapse">{{
+                                                $t("menuJson.history")
+                                            }}</span>
+                                    </p>
+                                    <el-dropdown-menu style="padding: 10px; margin-top: -5px" slot="dropdown">
+                                        <p class="index-historical" @click="onHistorical(item)" v-for="(item, i) in historicalList" :key="i" type="default" style="font-size: 14px; cursor: pointer; padding: 10px 0">
+                                            <router-link :to="{ path: item.route }">
+                                                <i class="iconfont" :class="item.icon"></i>
+                                                <span>{{ $t(item.name) }}</span>
+                                            </router-link>
+                                        </p>
+                                    </el-dropdown-menu>
+                                </el-dropdown>
+                            </div> -->
                             <div class="max">
-                                <el-menu ref="menu" :router="true" :default-active="menuActive" @select="onRouters" :collapse='isCollapse' :collapse-transition='false'>
+                                <el-menu ref="menu" :router="true" :default-active="menuActive" @select="onRouters"
+                                    :collapse='isCollapse' :collapse-transition='false'>
                                     <asideMenu v-for="item in menu" :data="item" :key="item.resourceId"></asideMenu>
                                 </el-menu>
                             </div>
                         </el-row>
                         <div class="fold">
                             <div @click.stop.prevent="onAsideListShow()" :class="menuOverflow">
+                                <!-- <el-tooltip class="item" effect="dark" :content="
+                                        $t('menuJson.collapseNavigationBar')
+                                    " placement="right"> -->
                                 <el-button>
                                     <i :class="
-                                                isCollapse
-                                                    ? 'iconfont icon-caidan_zhankai cacelmargin'
-                                                    : 'iconfont icon-caidan_zhankai isopen'
-                                            "></i>
+                                        isCollapse
+                                            ? 'iconfont icon-caidan_zhankai cacelmargin'
+                                            : 'iconfont icon-caidan_zhankai isopen'
+                                    "></i>
                                 </el-button>
+                                <!-- </el-tooltip> -->
                                 <span v-show="!isCollapse && isCollapseText">{{
                                         $t("menuJson.closeNavigationBar")
-                                    }}</span>
+                                }}</span>
                             </div>
                         </div>
                     </div>
@@ -55,29 +79,64 @@
                 <a href="#" @click.stop.prevent="onAsideListShow()">
                     <i class="iconfont iconcebianlanzhankai"></i>{{ $t("home.workbench") }}</a>
                 <div class="header-right displayNone">
+                    <!-- <el-dropdown class="index-header-right">
+                        <span class="el-dropdown-link index-header-right">
+                            <i class="iconfont icon_xieyiqiehuan"></i>
+                        </span>
+                        <el-dropdown-menu style="padding: 10px; margin-top: -10px" slot="dropdown" class="dropdownMenu">
+                            <p @click="checkStyle('dark')" style="padding-bottom: 15px;cursor: pointer;">暗</p>
+                            <p @click="checkStyle('light')" style="cursor: pointer;">亮</p>
+                        </el-dropdown-menu>
+
+                    </el-dropdown> -->
+
                     <div>
-                        <img v-if="n % 2 == 0 && !islightStyle" :src="fullScreenImg" alt="" @click.stop.prevent="getFullCreeen()">
-                        <img v-else-if="n % 2 == 0 && islightStyle" :src="fullScreenLightImg" @click.stop.prevent="getFullCreeen()" alt="">
+                        <img v-if="n % 2 == 0 && !islightStyle" :src="fullScreenImg" alt=""
+                            @click.stop.prevent="getFullCreeen()">
+                        <img v-else-if="n % 2 == 0 && islightStyle" :src="fullScreenLightImg"
+                            @click.stop.prevent="getFullCreeen()" alt="">
                         <!-- <i v-if="n % 2 == 0" class="iconfont iconquanping" @click.stop.prevent="getFullCreeen()"></i> -->
                         <img v-else :src="outFullScreeenImg" @click.stop.prevent="getFullCreeen()" alt="">
                     </div>
-                    <div class="themeImage" @click="checkStyle(islightStyle)">
+
+                    <div title="内容区全屏">
+                        <i style="font-size: 40px"
+                            :class="['iconfont', contentIsFullScreen ? 'icontuichuquanping2-copy' : 'icon-_quanping']"
+                            @click.stop.prevent="getContentFullscreen()"></i>
+                    </div>
+
+                    <!-- <el-dropdown trigger="click">
+                        <el-badge :value="totalMessage" class="item">
+                            <img src="/static/Images/message.svg" alt="">
+                        </el-badge>
+                        <el-dropdown-menu class="msg-dropdown" style="padding: 0 10px;" slot="dropdown">
+                            123456789
+                        </el-dropdown-menu>
+                    </el-dropdown> -->
+                    <!-- <unread :totalMessage="totalMessage" :messageList='messageList' @jump="toRouter"></unread> -->
+
+                    <div class="themeImage" @click="checkStyle(islightStyle)" v-if="showSwitchTheme">
                         <img :src="skinLightImg" alt="" v-if="islightStyle">
                         <img :src="skinImg" alt="" v-else>
                     </div>
+
+                    <!-- <el-avatar :src="'/static/Images/user.svg'">{{ loginUn }}</el-avatar> -->
                     <el-dropdown class="index-header-right">
                         <el-avatar v-if="theme === 'dark'" :src="'/static/Images/user1.svg'" shape="square"></el-avatar>
                         <el-avatar v-else :src="'/static/Images/user.svg'" shape="square"></el-avatar>
                         <el-dropdown-menu style="padding: 10px;" slot="dropdown">
-                            <p @click.stop.prevent="onSystemOperationInfor()" type="default" style="cursor: pointer;color: #F0F4FF;" v-if='!overdue'>
+                            <p @click.stop.prevent="onSystemOperationInfor()" type="default"
+                                style="cursor: pointer;color: #F0F4FF;" v-if='!overdue'>
                                 <i class="iconfont icon-xitongxinxi"></i>
                                 {{ this.$t("home.dialog.sysTemInfo") }}
                             </p>
-                            <p @click.stop.prevent="showEditPwd" type="default" style="cursor: pointer;color: #F0F4FF;" v-if='!overdue'>
+                            <p @click.stop.prevent="showEditPwd" type="default" style="cursor: pointer;color: #F0F4FF;"
+                                v-if='!overdue'>
                                 <i class="iconfont icon-xiugaimima"></i>
                                 {{ this.$t("home.dialog.changePassword") }}
                             </p>
-                            <p @click.stop.prevent="modal2 = true" type="default" style="cursor: pointer;color: #F0F4FF;">
+                            <p @click.stop.prevent="modal2 = true" type="default"
+                                style="cursor: pointer;color: #F0F4FF;">
                                 <i class="iconfont icon-tuichudenglu"></i>
                                 {{ this.$t("home.dialog.logOut") }}
                             </p>
@@ -85,6 +144,7 @@
                     </el-dropdown>
                     <span class="el-dropdown-link index-header-right">
                         {{ loginUsername }}
+                        <!-- <i class="iconfont iconxiajiantou"></i> -->
                     </span>
 
                 </div>
@@ -97,13 +157,16 @@
                             <i class="iconfont iconxiajiantou"></i>
                         </span>
                         <el-dropdown-menu style="padding: 10px 30px; margin-top: 5px" slot="dropdown">
-                            <p @click.stop.prevent="onSystemOperationInfor()" type="default" style="cursor: pointer; color: #63e03f">
+                            <p @click.stop.prevent="onSystemOperationInfor()" type="default"
+                                style="cursor: pointer; color: #63e03f">
                                 {{ this.$t("home.dialog.sysTemInfo") }}
                             </p>
-                            <p @click.stop.prevent="showEditPwd" type="default" style="padding: 15px 0; cursor: pointer; color: #2779E6">
+                            <p @click.stop.prevent="showEditPwd" type="default"
+                                style="padding: 15px 0; cursor: pointer; color: #2779E6">
                                 {{ this.$t("home.dialog.changePassword") }}
                             </p>
-                            <p @click.stop.prevent="modal2 = true" type="default" style="cursor: pointer; color: #FF5A65">
+                            <p @click.stop.prevent="modal2 = true" type="default"
+                                style="cursor: pointer; color: #FF5A65">
                                 {{ this.$t("home.dialog.logOut") }}
                             </p>
                         </el-dropdown-menu>
@@ -112,16 +175,18 @@
             </el-header>
 
             <!-- 系统运行信息 -->
-            <el-dialog :title="$t('home.dialog.sysTemInfo')" class="systemInformation_main" :visible.sync="curveShowCurve" @close="onCloseCurve" width="600px" top="30vh" center>
+            <el-dialog :title="$t('home.dialog.sysTemInfo')" class="systemInformation_main"
+                :visible.sync="curveShowCurve" @close="onCloseCurve" width="600px" top="30vh" center>
                 <div class="systemInformation">
+                    <!-- <header>系统运行信息</header> -->
                     <div class="information_box">
                         <div v-for="(item, index) in infoList" :key="index">
                             <p class="inform_title">{{ item.title }}</p>
                             <div class="inform_msg">
                                 <p class="inform_link" v-for="(items, indexs) in item.value" :key="indexs">
                                     <span class="inform_nm">{{
-                                                items.Key
-                                            }}</span>
+                                            items.Key
+                                    }}</span>
                                     <span :title="items.Value" class="inform_value">{{ items.Value }}</span>
                                 </p>
                             </div>
@@ -130,20 +195,25 @@
                 </div>
             </el-dialog>
 
-            <el-dialog class="editPassword" @close="inspectState" @closed="clearInput" :visible.sync="modal1" width="480px" top="28vh" :close-on-click-modal="false" :show-close="false" center>
+            <el-dialog class="editPassword" @close="inspectState" @closed="clearInput" :visible.sync="modal1"
+                width="480px" top="28vh" :close-on-click-modal="false" :show-close="false" center>
                 <div slot="title">
-                    <span class="el-dialog__title" style="line-height: 24px;font-size: 18px;">{{$t('home.dialog.changePassword')}}</span>
-                    <i style="position: absolute;top: 20px;right: 20px;line-height: 20px;font-size: 14px;color: #909399; cursor: pointer;" class="iconfont iconguanbi .el-dialog__headerbtn" @click.stop.prevent="modal1 = false"></i>
+                    <span class="el-dialog__title" style="line-height: 24px;font-size: 18px;">{{
+                            $t('home.dialog.changePassword')
+                    }}</span>
+                    <i style="position: absolute;top: 20px;right: 20px;line-height: 20px;font-size: 14px;color: #909399; cursor: pointer;"
+                        class="iconfont iconguanbi .el-dialog__headerbtn" @click.stop.prevent="modal1 = false"></i>
                 </div>
                 <el-form :model="changePwd" label-position="left" label-width="80px" :class="{
-                            changePasswordForm: true,
-                            changePasswordForm_en: language == 'en-US'
-                        }" :rules="rules" ref="changePasswordForm">
+                    changePasswordForm: true,
+                    changePasswordForm_en: language == 'en-US'
+                }" :rules="rules" ref="changePasswordForm">
                     <el-form-item :label="$t('home.dialog.originalPassword')" prop="oldPwd">
                         <el-input v-model="changePwd.oldPwd" v-if="modal1" show-password></el-input>
                     </el-form-item>
                     <el-form-item :label="$t('home.dialog.newPassword')" prop="newPwd">
-                        <el-input v-model="changePwd.newPwd" v-if="modal1" show-password @change="pwdInputChange"></el-input>
+                        <el-input v-model="changePwd.newPwd" v-if="modal1" show-password @change="pwdInputChange">
+                        </el-input>
                     </el-form-item>
                     <el-form-item :label="$t('home.dialog.confirmPassword')" prop="confPwd">
                         <el-input v-model="changePwd.confPwd" v-if="modal1" show-password></el-input>
@@ -151,17 +221,18 @@
                 </el-form>
                 <span slot="footer" class="dialog-footer">
                     <el-button type="primary" plain @click.stop.prevent="modal1 = false">{{
-                                $t("publics.button.cancel")
-                            }}</el-button>
+                            $t("publics.button.cancel")
+                    }}</el-button>
                     <el-button type="primary" @click.stop.prevent="changeCode()">{{ $t("publics.button.confirm") }}
                     </el-button>
                 </span>
             </el-dialog>
-            <el-dialog id="quit" :title="$t('home.tips.sureToLogOut')" :visible.sync="modal2" width="350px" top="35vh" center>
+            <el-dialog id="quit" :title="$t('home.tips.sureToLogOut')" :visible.sync="modal2" width="350px" top="35vh"
+                center>
                 <span slot="footer" class="dialog-footer">
                     <el-button type="primary" plain @click.stop.prevent="modal2 = false">{{
-                                $t("publics.button.cancel")
-                            }}</el-button>
+                            $t("publics.button.cancel")
+                    }}</el-button>
                     <el-button @click.stop.prevent="quitLogin" type="danger" style="color: #ffffff">
                         {{ $t("publics.button.confirm") }}</el-button>
                 </span>
@@ -172,24 +243,30 @@
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item>{{
                             $t("menuJson.home")
-                        }}</el-breadcrumb-item>
-                    <el-breadcrumb-item v-for="(item, i) in breadcrumbList" :key="i" :to="{ path: item.item }">{{ $t(item.title) }}</el-breadcrumb-item>
+                    }}</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="(item, i) in breadcrumbList" :key="i" :to="{ path: item.item }">{{
+                            $t(item.title)
+                    }}</el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
 
             <el-main class="container-main" v-if="!isTab && frameLayout.innerIFrame">
-                <router-view :key="$route.fullPath" @setMenu="resetMenu($event)"></router-view>
+                <router-view :key="$route.fullPath"></router-view>
             </el-main>
 
             <el-main class="container-main" v-if="isTab && frameLayout.innerIFrame">
-                <router-view :key="$route.fullPath" v-if="isError" @setMenu="resetMenu($event)"></router-view>
-                <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="tabClick" v-else>
-                    <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title" :name="item.name" :route="item.route" :data-va="index">
+                <router-view :key="$route.fullPath" v-if="isError"></router-view>
+                <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="tabClick"
+                    v-else>
+                    <el-tab-pane v-for="(item, index) in editableTabs" :key="item.name" :label="item.title"
+                        :name="item.name" :route="item.route" :data-va="index">
                         <template slot="label">
-                            <span class="el-icon-refresh-right" @click="refreshTab(index)" :class="{active: isActive}"></span>
-                            <span>{{item.title}}</span>
+                            <span class="el-icon-refresh-right" @click="refreshTab(index)"
+                                :class="{ active: isActive }"></span>
+                            <span>{{ item.title }}</span>
                         </template>
-                        <router-view :key="item.route" @setMenu="resetMenu($event)"></router-view>
+                        <router-view :key="item.route" :editableTabs="editableTabs"
+                            :editableTabsValue="editableTabsValue"></router-view>
                     </el-tab-pane>
                 </el-tabs>
             </el-main>
@@ -200,18 +277,28 @@
 
 <script>
 import asideMenu from 'gw-base-components-plus/asideMenu/menu.vue';
+import * as signalR from '@aspnet/signalr';
+import screenfull, { isEnabled } from 'screenfull';
+import $ from 'jquery'
+// import unread from 'gw-base-components-plus/unreadMsg/unread.vue';
+import keyEvent from 'gw-base-utils-plus/keyEvent'
+import exportHistory from 'gw-base-utils-plus/historyExport'
 export default {
+    mixins: [{ methods: keyEvent.methods }, exportHistory],
     components: {
         asideMenu
+        // , unread
     },
-    data () {
+    data() {
         return {
             menuOverflow: '',
+            theme: localStorage.theme || '',
             frameLayout: {
                 Header: true,
                 NavMenu: true,
                 innerIFrame: true
             },
+            showSwitchTheme: false,
             currentDate: '2021-06-01',
 
             smallImg: 'static/Images/logo.png',
@@ -324,6 +411,12 @@ export default {
 
             // 是否使用标签页
             isTab: false,
+            showSignalrData: '',
+
+            // 全屏参数
+            isEnableFullScreen: false,
+            FullScreenHome: [],
+            contentIsFullScreen: false,
             overdue: false,
 
             // 新消息数量
@@ -340,10 +433,10 @@ export default {
     },
 
     computed: {
-        language () {
+        language() {
             return window.sessionStorage.languageSet;
         },
-        rules () {
+        rules() {
             return {
                 oldPwd: [
                     {
@@ -369,16 +462,52 @@ export default {
                 ]
             };
         },
-        theme () {
-            return this.islightStyle ? 'light' : 'dark';
-        }
+        // theme() {
+        //     return this.islightStyle ? 'light' : 'dark';
+        // }
     },
 
-    created () {
-        if (!sessionStorage.languageSet) {
-            sessionStorage.languageSet = 'zh-CN';
-            this.$i18n.locale = 'zh-CN';
-        }
+    created() {
+        this.Axios({
+            methed: 'get',
+            url: '../../../../static/json/config.json'
+        }).then(res => {
+            let data = res.data;
+            this.config = data;
+            sessionStorage.isTab = data.labelPage;
+            if (!localStorage.theme) {
+                localStorage.setItem('theme', this.config.theme.default)
+            }
+            window.document.documentElement.setAttribute('data-theme', localStorage.theme)
+            this.theme = localStorage.theme;
+
+            this.showLangSelect = data.showLangSelect;
+            if (!this.showLangSelect || !window.sessionStorage.languageType) {
+                window.sessionStorage.languageType = 'zh-CN'
+            }
+            if (sessionStorage.languageType === 'zh-CN') {
+                document.title = this.config.zh.docTitle;
+            } else {
+                document.title = this.config.en.docTitle;
+            }
+
+            this.smallImg = data.img.indexSamllImg;
+            this.bigImg = data.img.indexBigImg;
+            this.bigImgLight = data.img.indexBigImgLight;
+            this.fullScreenImg = data.frameIcon.fullScreen;
+            this.fullScreenLightImg = data.frameIcon.fullScreenLight;
+            this.outFullScreeenImg = data.frameIcon.outFullScreeen;
+            this.skinImg = data.frameIcon.skin;
+            this.skinLightImg = data.frameIcon.skinLight;
+            this.frameLayout = data.frameLayout;
+            this.showSwitchTheme = data.showSwitchTheme;
+            sessionStorage.isTab = this.isTab = data.labelPage;
+            if (data.autoFullScreen) {
+                this.isEnableFullScreen = data.autoFullScreen.enable;
+                this.FullScreenHome = data.autoFullScreen.home;
+            }
+            this.showTopNav = data.showTopNav;
+        });
 
         if (sessionStorage.menuActive) {
             this.menuActive = sessionStorage.menuActive;
@@ -387,7 +516,10 @@ export default {
         this.getUserInfo();
         this.getUserName2SF();
     },
-    mounted () {
+    mounted() {
+        window.onmessage = (e) => {
+            this.curveSignalR(e)
+        }
         if (!this.isTab) {
             if (localStorage.breadcrumbList) {
                 this.breadcrumbList = JSON.parse(localStorage.breadcrumbList);
@@ -405,57 +537,41 @@ export default {
             this.modal1 = true;
         }
 
-        this.Axios({
-            methed: 'get',
-            url: '../../../../static/json/config.json'
-        }).then(res => {
-            let data = res.data;
-            if (sessionStorage.languageSet === 'zh-CN') {
-                document.title = data.zh.docTitle;
-            } else {
-                document.title = data.en.docTitle;
-            }
-            this.smallImg = data.img.indexSamllImg;
-            this.bigImg = data.img.indexBigImg;
-            this.bigImgLight = data.img.indexBigImgLight;
-            this.fullScreenImg = data.frameIcon.fullScreen;
-            this.fullScreenLightImg = data.frameIcon.fullScreenLight;
-            this.outFullScreeenImg = data.frameIcon.outFullScreeen;
-            this.skinImg = data.frameIcon.skin;
-            this.skinLightImg = data.frameIcon.skinLight;
-            this.frameLayout = data.frameLayout;
-            sessionStorage.isTab = this.isTab = data.labelPage;
-        });
-        window.document.documentElement.setAttribute('data-theme', this.theme)
 
-        const resizeObserver = new ResizeObserver(entry => {
-            if (entry[0].target.offsetHeight > document.getElementsByClassName('max')[0].offsetHeight) {
-                this.menuOverflow = 'menuOverflow';
-            } else {
-                this.menuOverflow = '';
+        this.signalrMonitorScene();
+        if (screenfull.isEnabled) {
+            screenfull.on('change', () => {
+                this.contentFullscreenChange();
+            });
+        }
+        window.addEventListener('message', (e) => {
+            if (e.data && typeof e.data == 'object' && 'setMenu' in e.data) {
+                // 传递被删除的菜单项的route到Index组件中
+                // this.$emit("setMenu", { route: e.data.route, setMenu: e.data.setMenu });
+                this.resetMenu({ route: e.data.route, setMenu: e.data.setMenu });
             }
-        });
+        })
 
-        resizeObserver.observe(document.getElementsByClassName('el-menu')[0])
+        document.onkeyup = this.keyEvent;
     },
-    beforeDestroy () {
+    beforeDestroy() {
         clearTimeout(this.intevalObj);
         this.intevalObj = null;
     },
-    destroyed () {
+    destroyed() {
         clearTimeout(this.intevalObj);
         this.intevalObj = null;
     },
     watch: {
-        $route (to, from) {
-            sessionStorage.menuActive = this.menuActive = to.path;
+        $route(to, from) {
+            sessionStorage.menuActive = this.menuActive = to.fullPath;
             if (to.path.includes('noAccess')) {
                 this.menu = [];
                 this.overdue = true
             }
             this.$nextTick(() => {
                 let activeDom = document.querySelector('.el-menu-item.is-active');
-                let title = activeDom ? activeDom.innerText : '';
+                let title = activeDom ? activeDom.getAttribute('name') : '';
 
                 if (!this.isTab) {
                     this.breadcrumbList = [
@@ -510,7 +626,77 @@ export default {
     },
 
     methods: {
-        resetMenu (data) {
+        signalrMonitorScene() {
+            window.sessionStorage.setItem('clickId', '');
+            let connection = new signalR.HubConnectionBuilder().withUrl('/monitor').build();
+            // console.log('connection', connection);
+            connection.start().then(() => {
+                connection.invoke('AddUserToGroup');
+                // connection.send('AddMessage', this.loginUsername);
+            }).catch(err => console.error(err));
+            connection.on('OnOpenWindow', signalrData => {
+                window.sessionStorage.setItem('clickId', '');
+                const data = JSON.parse(signalrData);
+                let pageArr = data.data.replace(/"/g, '').split('%');
+                if (pageArr[0].toUpperCase() === sessionStorage.userName.toUpperCase()) {
+                    let changePath = '';
+                    let judgeArr = [];
+                    if (pageArr[1].includes('clickId')) {
+                        let newQuery = this.getQueryClickId(pageArr[1]);
+                        changePath = newQuery.newHref;
+                        judgeArr = newQuery.newParames;
+                    } else {
+                        changePath = pageArr[1];
+                    }
+                    let isSame = judgeArr.length > 0 ? judgeArr.every(item => {
+                        return window.location.href.includes(item);
+                    }) : false;
+                    // 当预跳转路径与当前路径相同时不进行二次跳转
+                    if (isSame) {
+                        return;
+                    }
+                    changePath && this.$router.push(changePath);
+                }
+            });
+        },
+
+        /**
+         * clickId存入localStorage，同时返回去除clickId的路由
+         */
+        getQueryClickId(variable) {
+            let href = variable;
+            let param = href.indexOf('&') !== -1 ? href.split('&') : href.split('?');
+            let newHref = '';
+            let newParames = [];
+            for (let i = 0; i < param.length; i++) {
+                let pair;
+                if (param[i].indexOf('?') != -1) {
+                    pair = param[i].split('?')[1].split('=');
+                } else {
+                    pair = param[i].split('=');
+                }
+                if (pair[0] == 'clickId') {
+                    window.sessionStorage.setItem('clickId', pair[1]);
+                    continue;
+                }
+                newHref += (i == 0 ? '' : '&') + param[i];
+                newParames.push(param[i]);
+            }
+            return { newHref: newHref, newParames: newParames };
+        },
+        // 改变内容区域全屏的状态
+        contentFullscreenChange() {
+            this.contentIsFullScreen = screenfull.isFullscreen;
+        },
+        // 全屏
+        getContentFullscreen() {
+            if (!screenfull.isEnabled) {
+                return false;
+            }
+            screenfull.toggle(document.getElementsByClassName('container-main')[0]);
+            $('.jumpIframe').css('padding', '0px').contents().find('#app').css('padding', '0px 20px 20px');
+        },
+        resetMenu(data) {
             // 判断是否删除标签页
             if (data.route) {
                 // 找到标签页中被删除的菜单
@@ -527,14 +713,14 @@ export default {
 
         },
 
-        tabClick (event) {
+        tabClick(event) {
             let route = event.$attrs.route;
             sessionStorage.menuActive = this.menuActive = route;
             this.$router.push(route);
         },
 
         // 设置标签页
-        setTableTabs (title) {
+        setTableTabs(title) {
             let len = this.editableTabs.length;
 
             // 判断标签页数组是否存在当前选中导航项
@@ -567,7 +753,7 @@ export default {
         },
 
         // 关闭标签页
-        removeTab (targetName) {
+        removeTab(targetName) {
             let tabs = this.editableTabs;
             let activeName = this.editableTabsValue;
             if (activeName === targetName) {
@@ -589,7 +775,7 @@ export default {
         },
 
         // 刷新标签页
-        refreshTab (index) {
+        refreshTab(index) {
             let iframe = document.getElementsByClassName('jumpIframe');
             iframe[index].contentWindow.location.reload();
 
@@ -599,7 +785,7 @@ export default {
             }, 500);
         },
 
-        getRule () {
+        getRule() {
             this.$api
                 .GetAccountPasswordRule()
                 .then(res => {
@@ -619,7 +805,7 @@ export default {
                 });
         },
 
-        setRule () {
+        setRule() {
             let rule = JSON.parse(window.sessionStorage.accountRule);
             let regArr = ['(?=.*[a-z])', '(?=.*[A-Z])', '(?=.*[0-9])', "(?=.*[`~!@#$%^&*()_+={}|:;\"'<>,.?/-])"];
             let msgArr = ['小写字母', '大写字母', '数字', '特殊符号'];
@@ -659,7 +845,7 @@ export default {
             }
         },
 
-        validatePass (rule, value, callback) {
+        validatePass(rule, value, callback) {
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else if (!this.regPwdLength.test(value)) {
@@ -684,7 +870,7 @@ export default {
             }
         },
 
-        validateConfPass (rule, value, callback) {
+        validateConfPass(rule, value, callback) {
             if (value === '') {
                 callback(new Error(this.$t('home.tips.enterConfirmPas')));
             } else if (value != this.changePwd.newPwd) {
@@ -695,14 +881,14 @@ export default {
         },
 
         // // 中英文切换方法
-        changeLang () {
+        changeLang() {
             this.$i18n.locale == 'zh-CN'
                 ? (this.$i18n.locale = 'en')
                 : (this.$i18n.locale = 'zh-CN'); // 设置中英文模式
             localStorage.setItem('languageSet', this.$i18n.locale); // 将用户设置存储到localStorage以便用户下次打开时使用此设置
         },
 
-        getQueryParm (name) {
+        getQueryParm(name) {
             return (
                 decodeURIComponent(
                     (new RegExp(
@@ -716,13 +902,13 @@ export default {
         },
 
         // 截取路由
-        splitRouter (val) {
+        splitRouter(val) {
             let url = val.split('/');
             return url[url.length - 1];
         },
 
         // 历史菜单-最大10个记录
-        historical (data) {
+        historical(data) {
             let index = -1;
             if (
                 (index = this.historicalList.findIndex(
@@ -742,7 +928,7 @@ export default {
         },
 
         // 菜单点击事件
-        onRouters (type, data, el) {
+        onRouters(type, data, el) {
             // this.breadcrumbList = [
             //     {
             //         title: el.$el.innerText,
@@ -751,21 +937,21 @@ export default {
             // ];
             // localStorage.breadcrumbList = JSON.stringify(this.breadcrumbList);
         },
-        handleOpen (key, keyPath) {
+        handleOpen(key, keyPath) {
             console.log(key, keyPath);
         },
-        handleClose (key, keyPath) {
+        handleClose(key, keyPath) {
 
             // 禁止折叠菜单
             this.$refs.menus.open(keyPath);
 
             // console.log(key, keyPath);
         },
-        toRouter () {
+        toRouter() {
             this.menuActive = '/Index/jumpIframe/ganwei-iotcenter-system-snapshot/systemSnapshot';
             parent.vm.$router.push({ path: '/Index/jumpIframe/ganwei-iotcenter-system-snapshot/systemSnapshot' });
         },
-        notify (title, msg, classNm) {
+        notify(title, msg, classNm) {
 
             // 通知，解决element-ui，同时调用notify时，通知重叠的问题
             let _this = this;
@@ -777,18 +963,19 @@ export default {
                         type: classNm,
                         title: title,
                         dangerouslyUseHTMLString: true,
-                        message: h(
-                            'p',
-                            // {
-                            //     class: 'msgText'
-                            // },
-                            msg
-                        ),
+                        message: msg,
+                        // message: h(
+                        //     'p',
+                        //     // {
+                        //     //     class: 'msgText'
+                        //     // },
+                        //     msg
+                        // ),
                         onClick: _this.toRouter,
                     });
                 });
         },
-        getRealTimeDataInfo () {
+        getRealTimeDataInfo() {
             let that = this;
             this.$api
                 .getRealTimeData()
@@ -870,7 +1057,7 @@ export default {
                     console.log(err);
                 });
         },
-        getUserName2SF () {
+        getUserName2SF() {
             this.$api
                 .getUserName2SF()
                 .then(res => {
@@ -882,7 +1069,7 @@ export default {
                     console.log(err);
                 });
         },
-        getUserInfo () {
+        getUserInfo() {
             this.$api.GetMenus().then(res => {
                 if (res.data.code === 200) {
                     this.isError = false;
@@ -943,16 +1130,16 @@ export default {
         },
 
         // 系统运行信息
-        onSystemOperationInfor () {
+        onSystemOperationInfor() {
             this.curveShowCurve = true;
             this.getSystemInfo();
         },
-        onCloseCurve () {
+        onCloseCurve() {
             this.curveShowCurve = false;
         },
 
         // 获取系统运行信息
-        getSystemInfo () {
+        getSystemInfo() {
             this.$api.getSystemInfo().then(rt => {
                 if (rt.status == 200) {
                     let infoList = [
@@ -982,7 +1169,7 @@ export default {
             });
         },
 
-        inspectState () {
+        inspectState() {
             if (
                 window.sessionStorage.passwordPolicy &&
                 window.sessionStorage.passwordPolicy == 1
@@ -993,14 +1180,14 @@ export default {
         },
 
         // 清空输入的密码
-        clearInput () {
+        clearInput() {
             this.changePwd.oldPwd = '';
             this.changePwd.newPwd = '';
             this.changePwd.confPwd = '';
             this.$refs['changePasswordForm'].resetFields();
         },
 
-        pwdInputChange (val) {
+        pwdInputChange(val) {
             if (window.sessionStorage.accountRule) {
                 let rule = JSON.parse(window.sessionStorage.accountRule);
                 if (rule.password.minCharacters != 0) {
@@ -1019,7 +1206,7 @@ export default {
             }
         },
 
-        showEditPwd () {
+        showEditPwd() {
 
             // 获取最新规则，防止其他人更新后没有获取到最新规则
             this.getRule();
@@ -1027,15 +1214,15 @@ export default {
         },
 
         // 修改密码
-        changeCode () {
-            this.$refs['changePasswordForm'].validate(valid => {
+        changeCode() {
+            this.$refs['changePasswordForm'].validate(async valid => {
                 if (valid) {
                     let data = {
                         userName: window.sessionStorage.userName,
-                        oldPassword: this.$getCode.RSAEncrypt(
+                        oldPassword: await this.$getCode.RSAEncrypt(
                             this.changePwd.oldPwd
                         ),
-                        newPassword: this.$getCode.RSAEncrypt(
+                        newPassword: await this.$getCode.RSAEncrypt(
                             this.changePwd.newPwd
                         )
                     };
@@ -1075,7 +1262,7 @@ export default {
         },
 
         // 退出登录
-        quitLogin () {
+        quitLogin() {
             this.modal2 = false;
             this.$api.loginOut().then(rt => {
                 if (rt.data.code == 200) {
@@ -1093,7 +1280,7 @@ export default {
                         } else {
 
                             // window.location.href = '/loginOut.html';
-                            this.$router.replace('/ssoLogout');
+                            this.$router.replace('/jumpIframeLogin/ganwei-iotcenter-login/ssoLogout');
                         }
                     }
                 } else {
@@ -1101,10 +1288,10 @@ export default {
                 }
             });
         },
-        init () {
+        init() {
             this.loginUn = this.loginUsername ? this.loginUsername.substr(0, 1).toUpperCase() : '';
         },
-        onListIndex (index, type) {
+        onListIndex(index, type) {
             if (type === 'child') {
                 this.childIndex = index;
                 return;
@@ -1113,7 +1300,7 @@ export default {
         },
 
         // 导航菜单折叠显示
-        onAsideListShow () {
+        onAsideListShow() {
             this.isCollapse = !this.isCollapse;
             this.asideListShow = !this.asideListShow;
             this.maxWActive = this.asideListShow
@@ -1132,13 +1319,13 @@ export default {
         },
 
         // 全屏、不全屏
-        getFullCreeen () {
+        getFullCreeen() {
             this.n++;
             this.n % 2 == 0
                 ? this.outFullCreeen(document)
                 : this.inFullCreeen(document.documentElement);
         },
-        inFullCreeen (element) {
+        inFullCreeen(element) {
             let el = element;
             let rfs =
                 el.requestFullScreen ||
@@ -1154,7 +1341,7 @@ export default {
                 wscript.SendKeys('{F11}');
             }
         },
-        outFullCreeen (element) {
+        outFullCreeen(element) {
             let el = element;
             let cfs =
                 el.cancelFullScreen ||
@@ -1170,7 +1357,7 @@ export default {
                 wscript.SendKeys('{F11}');
             }
         },
-        checkStyle (islightStyle) {
+        checkStyle(islightStyle) {
             this.islightStyle = !islightStyle;
             if (this.theme == localStorage.getItem('theme')) {
                 return;
@@ -1191,4 +1378,5 @@ export default {
 };
 </script>
 
-<style lang="scss" src="gw-base-style-plus/index.scss" scoped></style>
+<style lang="scss" src="gw-base-style-plus/index.scss" scoped>
+</style>

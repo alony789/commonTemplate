@@ -6,10 +6,10 @@ import encrypt from "gw-base-api-plus/encrypt.js";
 
 const NOACCESS = () => import("gw-base-noAccess/noAccess.vue");
 const JUMPIFRAMED = () => import("./views/jumpIframe/jumpIframePro.vue");
-const JUMPiFRAMEDLOGIN = () => import('./views/jumpIframe/jumpIframeLogin.vue')
+const JUMPiFRAMEDLOGIN = () => import("./views/jumpIframe/jumpIframeLogin.vue");
 
 const originalPush = Router.prototype.push;
-Router.prototype.push = function push (location, onResolve, onReject) {
+Router.prototype.push = function push(location, onResolve, onReject) {
     if (onResolve || onReject)
         return originalPush.call(this, location, onResolve, onReject);
     return originalPush.call(this, location).catch(err => err);
@@ -23,7 +23,7 @@ const router = new Router({
     routes: [
         {
             path: "/",
-            redirect: 'jumpIframeLogin/ganwei-iotcenter-login/Login'
+            redirect: "jumpIframeLogin/ganwei-iotcenter-login/Login"
         },
         {
             path: "/jumpIframeLogin/*",
@@ -34,7 +34,6 @@ const router = new Router({
             path: "/Index",
             component: INDEX,
             children: [
-
                 // {
                 //     path: "",
                 //     redirect: 'ganwei-iotcenter-login/Login'
@@ -60,21 +59,25 @@ const router = new Router({
 });
 router.beforeEach((to, from, next) => {
     if (to.path === "/jumpIframeLogin/ganwei-iotcenter-login/Login") {
+        window.sessionStorage.removeItem("asideList");
         encrypt.clearMyKey();
     }
+    // 判断是否跳转去单点登录相关页面
     if (
         to.path == "/jumpIframeLogin/ganwei-iotcenter-login/ssoLogin" ||
         to.path == "/jumpIframeLogin/ganwei-iotcenter-login/ssoLogout" ||
-        (from.path == "/jumpIframeLogin/ganwei-iotcenter-login/ssoLogin" && to.path == "/Index")
+        (from.path == "/jumpIframeLogin/ganwei-iotcenter-login/ssoLogin")
     ) {
         next();
         return;
     }
 
+    // 判断是否跳转去登录页、无权限页、许可文件页、从登录页到首页
     if (
         to.path == "/jumpIframeLogin/ganwei-iotcenter-login/Login" ||
         to.path == "/Index/noAccess" ||
-        ((from.path == "/jumpIframeLogin/ganwei-iotcenter-login/Login" || from.path == "/jumpIframeLogin/ganwei-iotcenter-login/login") &&
+        ((from.path == "/jumpIframeLogin/ganwei-iotcenter-login/Login" ||
+            from.path == "/jumpIframeLogin/ganwei-iotcenter-login/login") &&
             to.path == "/Index") ||
         from.path == "/Index" ||
         to.path == "/jumpIframeLogin/ganwei-iotcenter-login/Maintain" ||
@@ -82,19 +85,24 @@ router.beforeEach((to, from, next) => {
     ) {
         next();
         return;
+        // 判断是否从登录页到首页
     } else if (
-        (from.path != "/jumpIframeLogin/ganwei-iotcenter-login/login" || from.path != "/jumpIframeLogin/ganwei-iotcenter-login/Login") &&
+        (from.path != "/jumpIframeLogin/ganwei-iotcenter-login/login" ||
+            from.path != "/jumpIframeLogin/ganwei-iotcenter-login/Login") &&
         to.path == "/Index"
     ) {
-
         if (window.sessionStorage.asideList) {
             let asideList = JSON.parse(window.sessionStorage.asideList);
-            next(asideList[0].route);
+            next(
+                asideList[0].route
+                    ? asideList[0].route
+                    : asideList[0].children[0].route
+            );
         } else {
             next();
         }
     } else {
-        let path = to.path;
+        let path = to.fullPath;
         if (window.sessionStorage.asideList) {
             let asideList = JSON.parse(window.sessionStorage.asideList);
             let haveRoute = false;
@@ -102,7 +110,7 @@ router.beforeEach((to, from, next) => {
 
             function forList (list) {
                 for (let i = 0; i < list.length; i++) {
-                    if (list[i].route == path) {
+                    if (list[i].route && list[i].route.split('?')[0] == path.split('?')[0]) {
                         haveRoute = true;
                     }
                     if ("children" in list[i]) {
@@ -114,13 +122,11 @@ router.beforeEach((to, from, next) => {
                 next();
             } else {
                 next(from.path);
-                return false;
             }
         } else {
-            console.log(99999);
             next("/jumpIframeLogin/ganwei-iotcenter-login/Login");
         }
     }
 });
-router.afterEach((to, from) => { });
+router.afterEach((to, from) => {});
 export default router;

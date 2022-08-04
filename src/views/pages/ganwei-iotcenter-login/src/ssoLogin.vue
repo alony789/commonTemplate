@@ -2,7 +2,7 @@
     <div id="ssoLogin" v-loading='loading' loading-type="2">
         <div class="error-box" v-show="isError">
             <img src="./Images/sso_error.png">
-            <p class="error-txt">{{errorTxt}}</p>
+            <p class="error-txt">{{ errorTxt }}</p>
             <el-button type="primary" @click="toBack">确定</el-button>
         </div>
     </div>
@@ -10,7 +10,7 @@
 <script>
 import apiFunction from 'gw-base-api-plus/apiFunction';
 export default {
-    data () {
+    data() {
         return {
             query: null,
             urlConfig: null,
@@ -20,11 +20,16 @@ export default {
             errorTxt: ""
         }
     },
-    mounted () {
+    mounted() {
         this.ssoLogin();
+        this.$router.onReady(()=>{
+            console.log(this.$route.query,6666);
+            // if(this.$route.query.source)
+        })
     },
     methods: {
-        async ssoLogin () {
+
+        async ssoLogin() {
             if (this.$route.query) {
                 this.query = this.$route.query;
             }
@@ -34,12 +39,13 @@ export default {
             // 获取接口配置
             await this.Axios({
                 methed: 'get',
-                url: 'static/json/config.json'
+                url: '/static/json/config.json'
             }).then((res) => {
                 if (res.status == 200 && res.data && res.data.ssoLogin) {
                     isGetUrl = res.data.enabledSsoUrl;
                     this.urlConfig = res.data.ssoUrl;
                     this.loginConfig = res.data.ssoLogin;
+
                 } else {
                     this.isError = true;
                     this.errorTxt = '获取配置信息异常，请联系平台运维人员处理~';
@@ -70,18 +76,22 @@ export default {
                     this.loading = false;
                 })
             } else {
-                console.log('ssologin');
-
                 // 调用单点登录接口
                 this.ssoApi(this.loginConfig.api, this.loginConfig.method, this.query).then(res => {
+                    console.log(res,999);
                     if (res.data.code == 200) {
                         this.$message.success('登录成功！');
                         if (res.data.data) {
-                            sessionStorage.userName = res.data.data.userName
-                            sessionStorage.roleName = res.data.data.roleName
+                            try {
+                                sessionStorage.userName = res.data.data.userName
+                                sessionStorage.roleName = res.data.data.roleName
+                            } catch (error) {
+                                console.log(error);
+                            }
+
                         }
                         sessionStorage.isSsoLogin = '1';
-                        window.top.location.href = '/#/Index'
+                        window.top.location.href = window.top.location.origin+decodeURI(this.query.url);
                         // this.$router.push('/Index');
                     } else {
                         this.isError = true;
@@ -98,7 +108,7 @@ export default {
         },
 
         // 可配置接口
-        ssoUrlApi (api, method) {
+        ssoUrlApi(api, method) {
             return this.Axios({
                 method: method,
                 url: api
@@ -106,7 +116,7 @@ export default {
         },
 
         // 可配置接口
-        ssoApi (api, method, data) {
+        ssoApi(api, method, data) {
             return this.Axios({
                 method: method,
                 url: api,
@@ -115,7 +125,7 @@ export default {
             });
         },
 
-        toBack () {
+        toBack() {
             window.history.back(-1);
         }
     }

@@ -14,15 +14,15 @@
 
         img {
             position: fixed;
-            right: 0px;
-            bottom: 0px;
+            right: 50%;
+            bottom: 50%;
             min-width: 100%;
             min-height: 100%;
             height: auto;
             width: auto;
             background-size: 100% 100%;
+            transform: translate(50%, 50%);
         }
-
 
         /*加滤镜*/
         /*filter: blur(15px); //背景模糊设置 */
@@ -41,7 +41,7 @@
         text-align: center;
         font-size: 22px;
         font-weight: 500;
-        @include font_color('con-textColor1');
+        @include font_color("con-textColor1");
     }
 
     .default {
@@ -55,14 +55,13 @@
         /deep/ .el-form {
             width: 530px;
             // background: $n-frondColor;
-            @include background_color('con-bgColor4');
+            @include background_color("con-bgColor4");
             padding: 24px;
 
             &-item {
-
                 &__label {
                     font-size: 16px;
-                    @include font_color('con-textColor1');
+                    @include font_color("con-textColor1");
                 }
 
                 .el-input__inner {

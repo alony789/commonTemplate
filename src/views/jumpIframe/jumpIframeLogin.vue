@@ -20,10 +20,18 @@ export default {
     mounted () {
         let packageSrc = process.env.NODE_ENV == 'development' ? process.env.PAGE_ENV + '/' : '/'
         let queryVal = this.$route.query.systemName ? ('?systemName=' + this.$route.query.systemName) : '';
+        let fullPath = this.$route.fullPath;
         this.url = this.$router.currentRoute.path.replace('/jumpIframeLogin/', '');
         this.url.indexOf('.html') != -1 ? (this.url = packageSrc + this.url + queryVal) : (this.url = packageSrc + this.url.replace('/', '/#/') + queryVal);
+        if (fullPath.split('?').length > 1) {
+            this.url = this.url + '?' + fullPath.split('?')[1];
+        }
         window.sessionStorage.removeItem('menuActiveName');
         window.sessionStorage.removeItem('menuActive');
+        let iframe = document.getElementsByClassName('jumpIframes')[0];
+        iframe.onload = () => {
+            // this.myUtils.setStyle(iframe.contentWindow.document.getElementsByTagName("head")[0])
+        }
     },
 
     methods: {

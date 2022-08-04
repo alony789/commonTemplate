@@ -27,7 +27,7 @@ import en from "gw-base-language/en-us/en";
 Vue.use(VueI18n);
 import ElementLocale from "element-ui/lib/locale";
 const i18n = new VueI18n({
-    locale: sessionStorage.languageSet,
+    locale: 'zh-CN',
     messages: {
         zh: zh,
         en: en

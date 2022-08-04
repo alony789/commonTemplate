@@ -5,7 +5,7 @@ const LOGIN = () => import("./src/Login.vue");
 const SSOLOGIN = () => import("./src/ssoLogin.vue");
 const SSOLOGOUT = () => import("./src/ssoLogout.vue");
 
-
+// 许可维护
 const MAINTENANCEINFO = () =>
     import("./src/maintenanceInfo.vue");
 const MAININFO = () => import("./src/mainInfo.vue");

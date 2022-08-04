@@ -18,9 +18,10 @@
 </template>
 <script>
 
-import exportHistory from 'gw-base-utils-plus/historyExport'
+
+import keyEvent from 'gw-base-utils-plus/keyEvent'
 export default {
-    mixins: [exportHistory],
+    mixins: [ keyEvent],
     data () {
         return {
             url: '',
@@ -29,25 +30,17 @@ export default {
         }
     },
     mounted () {
-        window.onmessage = (e) => {
-            this.curveSignalR(e)
-            if (e.data && typeof e.data == 'object' && 'setMenu' in e.data) {
-                // 传递被删除的菜单项的route到Index组件中
-                this.$emit("setMenu", { route: e.data.route, setMenu: e.data.setMenu });
-            }
-        }
-
         let packageSrc = process.env.NODE_ENV == 'development' ? process.env.PAGE_ENV + '/' : '/'
         let queryVal = this.$route.query.systemName ? ('?systemName=' + this.$route.query.systemName) : '';
-        this.url = this.$router.currentRoute.path.replace('/Index/jumpIframe/', '');
-        if (process.env.NODE_ENV == 'development' && process.env.FILES_ENV && process.env.FILES_ENV.moduleList && process.env.FILES_ENV.moduleList.indexOf(this.url.split('/')[0]) == -1) {
+        this.url = this.$router.currentRoute.fullPath.replace('/Index/jumpIframe/', '');
+        if (process.env.NODE_ENV == 'development' && process.env.FILES_ENV.moduleList && process.env.FILES_ENV.moduleList.indexOf(this.url.split('/')[0]) == -1) {
             this.url = './src/views/pages/ganwei-iotcenter-login/#/Login'
         } else {
             this.url.indexOf('.html') != -1 ? (this.url = packageSrc + this.url + queryVal) : (this.url = packageSrc + this.url.replace('/', '/#/') + queryVal);
 
-            if (this.$route.fullPath.indexOf('topologyList') > -1) {
-                this.url = this.url + '?' + this.$route.fullPath.split('?')[1];
-            }
+            // if (this.$route.fullPath.indexOf('topologyList') > -1) {
+            //     this.url = this.url + '?' + this.$route.fullPath.split('?')[1];
+            // }
         }
 
         let arr = document.getElementsByClassName('jumpIframe');
@@ -63,7 +56,9 @@ export default {
 
             iframe.style.padding = '0px';
             let innerIframe = iframe.contentWindow.document;
-            innerIframe.getElementById('app').style.padding = '0px 20px 20px';
+            if (innerIframe.getElementById('app')) {
+                innerIframe.getElementById('app').style.padding = '0px 20px 20px';
+            }
 
             // $('.jumpIframe').css('padding', '0px').contents().find('#app').css('padding', '0px 20px 20px');
             let theme = localStorage.getItem('theme');
@@ -74,7 +69,7 @@ export default {
     watch: {
         $route (to, from) {
             if (sessionStorage.isTab == 'false') {
-                this.url = to.path.replace('/Index/jumpIframe/', '').replace('/', '/#/');
+                this.url = to.fullPath.replace('/Index/jumpIframe/', '').replace('/', '/#/');
             }
         }
     }
@@ -86,6 +81,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 .jumpIframe {
     width: 100%;

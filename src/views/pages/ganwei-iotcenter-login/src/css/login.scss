@@ -13,11 +13,15 @@
     padding: 40px 0px;
     text-align: center;
 
+    /deep/ .el-loading-mask {
+        visibility: visible;
+    }
+
     .loginBg {
         // background: url(../Images/login.jpg) no-repeat;
         position: fixed;
-        right: 0px;
-        bottom: 0px;
+        right: 50%;
+        bottom: 50%;
         min-width: 100%;
         min-height: 100%;
         height: auto;
@@ -25,12 +29,13 @@
 
         img {
             position: fixed;
-            right: 0px;
-            bottom: 0px;
+            right: 50%;
+            bottom: 50%;
             min-width: 100%;
             min-height: 100%;
             height: auto;
             width: auto;
+            transform: translate(50%, 50%);
         }
 
         /*加滤镜*/
@@ -45,7 +50,7 @@
         // }
     }
 
-    >header {
+    > header {
         position: fixed; // width: 333px;
         top: 44px;
         left: 50%;
@@ -70,14 +75,14 @@
     }
 
     .img_box {
-        >img {
+        > img {
             width: 50px !important;
             height: 50px !important;
             border: 1px solid $black;
         }
     }
 
-    >section {
+    > section {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -133,23 +138,23 @@
 
             h2 {
                 margin-bottom: 5%;
-                @include font_color('con-textColor1');
+                @include font_color("con-textColor1");
                 font-size: 1.5rem;
                 text-align: left;
                 font-weight: normal;
             }
 
-            >p {
+            > p {
                 margin-top: 32px;
                 text-align: left;
 
-                >span {
+                > span {
                     display: block;
                     width: 100%;
-                    @include font_color('con-textColor2');
+                    @include font_color("con-textColor2");
 
                     span {
-                        @include font_color('con-textColor2');
+                        @include font_color("con-textColor2");
                     }
 
                     // &:first-child {
@@ -162,14 +167,14 @@
                         margin: 0 5px;
                         float: left;
                         display: block;
-                        @include font_color('con-textColor2');
+                        @include font_color("con-textColor2");
                         font-size: 1rem;
                         font-weight: bold;
                     }
 
                     input {
                         font-size: 0.9rem;
-                        @include font_color('con-textColor1');
+                        @include font_color("con-textColor1");
                         width: 100%;
                         height: 40px;
                         text-indent: 1rem;
@@ -183,7 +188,7 @@
                     /deep/ .el-input {
                         input {
                             border-width: 0.5px;
-                            @include background_color('input-bgColor');
+                            @include background_color("input-bgColor");
                             height: 52px;
                             padding-left: 46px;
                         }
@@ -240,6 +245,14 @@
                     padding-right: 10px;
                 }
 
+                .codeLoading {
+                    display: inline-block;
+                    flex: 1;
+                    max-width: 120px;
+                    height: 52px;
+                    cursor: pointer;
+                }
+
                 #code_img {
                     flex: 1;
                     max-width: 120px;
@@ -279,7 +292,7 @@
         }
     }
 
-    >footer {
+    > footer {
         width: 100%;
         position: fixed;
         bottom: 24px;
@@ -316,6 +329,4 @@
             }
         }
     }
-
-
 }
