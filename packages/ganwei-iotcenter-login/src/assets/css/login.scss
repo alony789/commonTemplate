@@ -1,0 +1,252 @@
+// 敢为
+.login {
+    width: 100%;
+    height: 100%;
+
+    ::v-deep .languageSelect {
+        width: 130px;
+        height: 42px;
+        position: fixed;
+        right: 30px;
+        top: 30px;
+
+        z-index: 1;
+
+        .select-trigger {
+            height: 100%;
+
+            .el-input {
+                height: 100%;
+            }
+            .el-input__wrapper  {
+                background-color: #fff;
+                border: none;
+                .el-input__inner {
+                    color: #000 !important;
+                    background-color: #fff !important;
+                }
+            }
+        }
+
+        .el-input__prefix {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 20px;
+        }
+    }
+
+    .el-loading-mask {
+        visibility: visible;
+    }
+
+    .backgroundImage {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        pointer-events: none;
+    }
+
+    >section {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        height: 410px;
+        border-radius: 6px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        transition: height 1s ease;
+
+        .login_form {
+            padding: 48px 50px;
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            box-sizing: border-box;
+
+
+            .blurBackground {
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                filter: blur(32px);
+                border-radius: 6px;
+                z-index: -1;
+            }
+
+            .logo {
+                opacity: 0;
+                transform: translate(-40px);
+                animation: enter-x-animation .3s ease-in-out .3s;
+                animation-fill-mode: forwards;
+                text-align: center;
+                margin-bottom: 40px;
+
+                img {
+                    // width: 200px;
+                    height: 50px;
+                }
+            }
+
+            .el-form {
+                .el-form-item {
+                    margin-bottom: 32px !important;
+                    opacity: 0;
+                    animation: enter-x-animation .4s ease-in-out .3s;
+                    animation-fill-mode: forwards;
+
+                    &:nth-of-type(1) {
+                        transform: translate(-80px);
+                    }
+
+                    &:nth-of-type(2) {
+                        transform: translate(-120px);
+                    }
+
+                    &:nth-of-type(3) {
+                        transform: translate(-160px);
+                    }
+                }
+
+                .el-form-item__content {
+                    width: 100%;
+                    margin-left: 0px !important;
+                }
+            }
+
+            ::v-deep .el-input {
+                .el-input__wrapper {
+                    width: 100%;
+                    height: 52px;
+                    border-width: 0.5px !important;
+                    border-radius: 3px;
+                    border: none;
+                    background-color: #fff;
+                    .el-input__inner {
+                        color: #000 !important;
+                        background-color: #fff !important;
+                    }
+                }
+
+                .el-input__prefix {
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 15px;
+                }
+            }
+
+            .verificationCode {
+                position: relative;
+                width: 100%;
+                height: 52px;
+                overflow: hidden;
+                display: flex;
+
+                ::v-deep .el-input {
+                    flex: 1;
+                    margin-right: 10px;
+                }
+
+                .codeLoading {
+                    display: inline-block;
+                    flex: 1;
+                    max-width: 120px;
+                    height: 52px;
+                    cursor: pointer;
+                }
+
+                #code_img {
+                    flex: 1;
+                    max-width: 120px;
+                    height: 52px;
+                }
+            }
+
+            .submit {
+                width: 100%;
+                height: 40px;
+                transform: translate(-200px);
+                opacity: 0;
+                animation: enter-x-animation .4s ease-in-out .3s;
+                animation-fill-mode: forwards;
+            }
+
+            .loading {
+                display: block;
+                margin-top: 32px;
+                height: 40px;
+                line-height: 40px;
+                border-radius: 3px;
+                font-size: 1rem;
+                text-align: center;
+                cursor: pointer;
+                background-color: rgba(49, 108, 251, 1);
+
+                &:hover {
+                    background-color: rgba(49, 108, 251, 1);
+                }
+            }
+        }
+
+    }
+
+    >footer {
+        width: 100%;
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 32px;
+        white-space: nowrap;
+
+        span {
+            height: 32px;
+            line-height: 32px;
+            font-size: 1rem;
+            // color: $n-fontColor;
+            white-space: nowrap;
+            vertical-align: bottom;
+        }
+
+        .footer-btn {
+            width: 107px;
+            height: 28px;
+            position: fixed;
+            right: 30px;
+            bottom: 0;
+            opacity: 0;
+        }
+
+        &:hover {
+            .footer-btn {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@keyframes enter-x-animation {
+    to {
+        opacity: 1;
+        transform: translate(0)
+    }
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+    background-color: transparent;
+    background-image: none;
+    transition: background-color 50000s ease-in-out 0s; //背景色透明  生效时长  过渡效果  启用时延迟的时间
+}

@@ -1,0 +1,39 @@
+.el-dropdown-menu {
+    margin-top: 0;
+
+    p {
+        font-size: 14px;
+        width: 220px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        color: #f0f4ff;
+        padding: 10px 4px;
+        margin: 0px;
+
+        i {
+            margin-left: 16px;
+            margin-right: 14px;
+            font-size: 16px;
+        }
+    }
+
+    .user {
+        padding: 4px 15px 14px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid var(--poper-border);
+
+        .el-avatar {
+            background: transparent;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        span {
+            color: var(--dropdown-menu-color);
+            font-size: 16px;
+        }
+    }
+}

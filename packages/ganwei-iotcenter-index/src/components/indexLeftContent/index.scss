@@ -1,0 +1,227 @@
+.maxActive {
+    width: 220px;
+    height: 100%;
+    left: 0px;
+    position: fixed;
+    z-index: 100;
+}
+
+::v-deep .el-menu {
+    overflow: auto;
+    background-color: transparent;
+    border-right: none;
+    padding: 0;
+
+    .el-menu-item,
+    .el-sub-menu {
+        &:hover {
+            .iconfont {
+                font-size: 18px !important;
+            }
+        }
+    }
+}
+
+.minActive {
+    width: 64px;
+    position: relative;
+
+
+    .minActiveContent {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: -64px;
+
+        ::v-deep .el-menu {
+
+            .el-sub-menu,
+            .el-menu-item {
+                display: flex;
+                justify-content: center;
+            }
+
+            .el-sub-menu__title,
+            .el-menu-item {
+                padding: 0px !important;
+            }
+
+            .el-sub-menu__title {
+                &:hover {
+                    background-color: transparent !important;
+                }
+            }
+
+            .el-menu-item {
+                width: 100%;
+
+            }
+        }
+
+    }
+}
+
+.isCollapse {
+    margin-right: 0;
+
+    .maxActive {
+        left: calc(var(--left)*(-1px)) !important;
+    }
+
+    .minActive {
+        .minActiveContent {
+            left: 0px !important;
+        }
+    }
+}
+
+.noIsCollapse {
+    margin-right: calc(var(--result)*1px);
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    z-index: 99;
+
+    .maxActive {
+        left: 0px !important;
+
+    }
+
+    .minActive {
+        .minActiveContent {
+            left: -64px !important;
+        }
+
+    }
+}
+
+.transition {
+    transition: all 0.5s ease-in-out;
+}
+
+.maxW {
+    user-select: none;
+    height: 100%;
+    background-color: var(--frame-left-background);
+
+    .aside-header {
+        height: 64px;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding-left: 20px;
+        background-color: var(--frame-top-background);
+        box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.05);
+
+        .aside-header-box {
+            display: flex;
+            justify-content: center;
+            white-space: nowrap;
+            height: 100%;
+            overflow: hidden;
+
+            img {
+                height: 85%;
+            }
+
+            a {
+                display: flex;
+                align-items: center;
+            }
+
+            .min-img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    // 导航
+    .left-nav {
+        width: 100%;
+        height: calc(100% - 64px); // 新版UI
+
+        .list {
+            width: 100%;
+            height: calc(100% - 44px);
+
+            .max {
+                width: calc(100% + 8px);
+                height: 100%;
+                overflow: hidden;
+                padding-top: 20px;
+
+                ::v-deep .el-loading-mask {
+                    visibility: visible;
+                }
+
+                .el-input {
+                    width: calc(100% - 40px);
+                    text-indent: 0;
+                    margin-left: 20px;
+                    margin-bottom: 10px;
+                    font-size: 14px !important;
+
+                    .el-input__icon {
+                        color: #c0c4cc;
+                    }
+
+                    .el-input__wrapper {
+                        background: transparent;
+                        box-shadow: 0 0 0 0px;
+                    }
+                }
+
+                .el-menu {
+                    height: calc(100% - 34px)
+                }
+            }
+        }
+
+        // 折叠面板按钮
+        .fold {
+            width: 100%;
+            height: 44px;
+
+            >div {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+                height: 100%;
+                font-size: 14px;
+                cursor: pointer;
+                margin: 0px 20px;
+                border-top: 1px solid rgba(157, 166, 186, 0.39);
+
+                &.menuOverflow {
+                    border-top: none;
+                }
+
+                span {
+                    color: var(--menu-color);
+                }
+
+                i {
+                    font-size: 16px;
+                    margin-right: 16px;
+                    color: var(--menu-color);
+                }
+
+                i.cacelmargin {
+                    margin-left: 4px !important;
+                    margin-right: 0px !important;
+                }
+
+                button {
+                    border: 0;
+                    padding: 0;
+                    background-color: transparent !important;
+                }
+
+                .el-button--default {
+                    padding: 0;
+                    border: none !important;
+                }
+            }
+        }
+    }
+}

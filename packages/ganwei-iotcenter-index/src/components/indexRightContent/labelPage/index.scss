@@ -1,0 +1,111 @@
+ .container-main {
+     ::v-deep .el-tabs {
+         height: 100%;
+
+         iframe {
+             border: 0px;
+         }
+
+         .el-tabs__header {
+
+             height: 24px;
+             margin-bottom: 0;
+             border-bottom: 1px solid;
+             background-color: var(--labelpage-header-background);
+             border-color: var(--labelpage-border);
+
+             .el-tabs__nav-scroll {
+                 ::-webkit-scrollbar {
+                     width: 4px;
+                     height: 4px;
+                 }
+
+                 ::-webkit-scrollbar-button:vertical:start,
+                 ::-webkit-scrollbar-button:vertical:end,
+                 ::-webkit-scrollbar-button:horizontal:start,
+                 ::-webkit-scrollbar-button:horizontal:end {
+                     display: none;
+                 }
+
+                 ::-webkit-scrollbar-corner {
+                     background-color: red;
+                 }
+             }
+
+             .el-tabs__nav {
+                 height: 24px;
+                 border: 0;
+
+                 &:hover {
+                     overflow-x: auto;
+                     overflow-y: hidden;
+                 }
+
+                 .el-tabs__item {
+                     height: 100%;
+                     margin: 0;
+                     border: 0;
+                     background-color: var(--labelpage-background);
+                     color: var(--labelpage-color);
+
+                     &:not(:first-child) {
+                         margin-left: 1px;
+                     }
+
+                     &:only-of-type {
+                         .el-icon-close {
+                             display: none;
+                         }
+                     }
+
+                     .el-icon {
+                         font-size: 14px;
+                         margin-right: 4px;
+                         overflow: hidden;
+                     }
+
+                     span:nth-child(2) {
+                         font-size: 12px;
+                     }
+                 }
+
+                 .el-icon-close {
+                     font-size: 14px;
+
+                     &:hover {
+                         background: transparent;
+                         color: var(--labelpage-icon-color__hover);
+                     }
+                 }
+
+                 .is-active {
+                     background-color: var(--labelpage-background__active);
+                     color: var(--labelpage-color__active);
+                     border-bottom: none;
+
+                     .el-icon-refresh-right {
+                         width: 14px;
+                         transition: all 0.3s;
+
+                         &:hover {
+                             color: var(--labelpage-icon-color__hover);
+                         }
+                     }
+
+                     .active {
+                         transform: rotate(360deg);
+                         transition: all 0.5s;
+                     }
+                 }
+             }
+         }
+
+         .el-tabs__content {
+             height: calc(100% - 24px);
+
+             .el-tab-pane {
+                 height: 100%;
+             }
+         }
+     }
+ }
