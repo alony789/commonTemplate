@@ -5,5 +5,5 @@
         "ganwei-iotcenter-template": "http://127.0.0.1:8190"
     },
     "applicationPath": {},
-    "proxyTarget": "https://test.iotapp.ganweicloud.com:44380/"
+    "proxyTarget": "https://127.0.0.1:44380/"
 }
