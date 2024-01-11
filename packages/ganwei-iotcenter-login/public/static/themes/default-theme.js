@@ -20,8 +20,14 @@
     if (localStorage.theme) {
         setTheme(localStorage.theme)
     } else {
-        if (_this.top && _this.top.getConfigInfoData) {
-            _this.top.getConfigInfoData().then(res => {
+        let requestApi
+        try {
+            requestApi = _this.top.getConfigInfoData
+        } catch (error) {
+            requestApi = _this.getConfigInfoData
+        }
+        if (_this.top && requestApi) {
+            requestApi().then(res => {
                 setTheme(res && res.theme && res.theme.default || 'dark')
             }).catch(err => {
                 setTheme('dark')

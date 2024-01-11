@@ -52,16 +52,18 @@ export default {
             this.$api
                 .GetServiceStatus()
                 .then(res => {
-                    const { code, message } = res?.data || {}
+                    const { code, message, data } = res?.data || {}
                     if (code === 200) {
-                        this.licenseForm.serviceStatus = this.$t(
-                            'login.mainInfoDialog.tips.startUp'
-                        );
-                    } else {
-                        this.$message.error(message);
-                        this.licenseForm.serviceStatus = this.$t(
-                            'login.mainInfoDialog.tips.noStartUp'
-                        );
+                        if (data?.serviceStatus == 2) {
+                            this.licenseForm.serviceStatus = this.$t(
+                                'login.mainInfoDialog.tips.startUp'
+                            );
+                        } else {
+                            // this.$message.error(message);
+                            this.licenseForm.serviceStatus = this.$t(
+                                'login.mainInfoDialog.tips.noStartUp'
+                            );
+                        }
                     }
                 })
                 .catch(error => {
@@ -73,32 +75,37 @@ export default {
             this.$api
                 .GetServiceStatus()
                 .then(res => {
-                    const { code } = res?.data || {}
+                    const { code, data } = res?.data || {}
                     if (code === 200) {
-                        this.licenseForm.serviceStatus = this.$t(
-                            'login.mainInfoDialog.tips.startUp'
-                        );
-                        this.$message.success(this.tipsMessage);
-                        this.RebootWeb();
-                        setTimeout(async () => {
+                        if (data?.licenseStatus === false) {
+                            this.licenseForm.serviceStatus = this.$t(
+                                'login.mainInfoDialog.tips.noStartUp'
+                            );
                             this.loadingDialogVisible = false;
-                            this.percentage = 100;
-                            this.$router.push('/')
-                        }, 30000);
-                    } else {
-                        this.licenseForm.serviceStatus = this.$t(
-                            'login.mainInfoDialog.tips.noStartUp'
-                        );
-                        this.loadingDialogVisible = false;
-                        this.$message.error(
-                            this.$t(
-                                'login.mainInfoDialog.tips.serviceNotStartUp'
-                            )
-                        );
-                        this.timeInterval = setInterval(async () => {
-                            await this.GetLicenseInfo();
-                            await this.GetServiceStatus();
-                        }, 5000);
+                            this.$message.error(this.$t('login.mainInfoDialog.tips.lisenceNoFit'));
+                            return;
+                        }
+                        if (data?.serviceStatus == 2) {
+                            this.licenseForm.serviceStatus = this.$t(
+                                'login.mainInfoDialog.tips.startUp'
+                            );
+                            this.$message.success(this.tipsMessage);
+                            this.RebootWeb();
+                            setTimeout(async () => {
+                                this.loadingDialogVisible = false;
+                                this.percentage = 100;
+                                this.$router.push('/')
+                            }, 30000);
+                        } else if (data?.serviceStatus == 0) {
+                            this.licenseForm.serviceStatus = this.$t(
+                                'login.mainInfoDialog.tips.noStartUp'
+                            );
+                            this.loadingDialogVisible = false;
+                            setTimeout(async () => {
+                                await this.GetLicenseInfo();
+                                await this.GetServiceStatus();
+                            }, 5000)
+                        }
                     }
                 })
                 .catch(error => {
@@ -118,7 +125,7 @@ export default {
                         this.licenseForm.registrationCode = data?.authCode || '';
                         this.licenseForm.licenseStatus = data?.licenseState || '';
                     } else {
-                        this.$message.error(message);
+                        // this.$message.error(message);
                         this.licenseForm.licenseStatus = message;
                     }
                 })
@@ -135,7 +142,7 @@ export default {
                     this.isInitSate = false;
                 } else {
                     this.isInitSate = true;
-                    this.$message.error(message);
+                    // this.$message.error(message);
                 }
             }).catch(err => {
                 this.$message.error(err?.data, err)
@@ -184,7 +191,6 @@ export default {
         },
 
         async getLicenseStatus (licenseStatus) {
-            console.log(licenseStatus, 44444)
             if (licenseStatus === '已生效') {
                 this.$confirm(
                     this.$t('login.mainInfoDialog.tips.lisensIsEffectIfNext'),
@@ -220,9 +226,7 @@ export default {
                     const { code, message } = res?.data || {};
                     if (code === 200) {
                         this.$message.success(message);
-                        this.timeOut = setTimeout(async () => {
-                            await this.getStatus();
-                        }, 35000);
+                        this.InitService();
                     } else {
                         this.loadingDialogVisible = false;
                         this.$message.error(message);
@@ -277,11 +281,11 @@ export default {
                 this.$api
                     .InitService()
                     .then(res => {
-                        const { code, message } = res?.data || {};
-                        if (code !== 200) {
-                            this.loadingDialogVisible = false;
-                            this.$message.error(message);
-                        }
+                        // const { code, message } = res?.data || {};
+                        // if (code !== 200) {
+                        //     this.loadingDialogVisible = false;
+                        //     this.$message.error(message);
+                        // }
                     })
                     .catch(error => {
                         this.loadingDialogVisible = false;
@@ -309,9 +313,7 @@ export default {
             this.$api
                 .RebootWeb()
                 .then(() => { })
-                .catch(error => {
-                    this.$message.error(error?.data)
-                });
+                .catch(() => { });
         },
 
         // 下载日志

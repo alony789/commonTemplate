@@ -1,10 +1,3 @@
-/*
- * @Description:
- * @Version: v1
- * @Author: zkx
- * @LastEditTime: 2023-10-27 20:50:01
- * Copyright (c) 2023 by 敢为软件, All Rights Reserved.
- */
 
 /* eslint-disable */
 import { createApp } from "vue";

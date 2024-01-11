@@ -51,7 +51,9 @@ export default {
             immediate: true
         },
         $route () {
-            try { ContextMenu.close() } catch (e) { }
+            try { ContextMenu.close() } catch (e) {
+                console.log(e)
+            }
             this.updateTabs()
         }
     },
@@ -108,7 +110,7 @@ export default {
             if (targetName === '') return
             let startIndex = this.editableTabs.findIndex(i => i.name == targetName)
             ContextMenu({
-                width: '140',
+                width: '150',
                 root: e.currentTarget,
                 left: e.clientX,
                 top: e.clientY,
@@ -223,7 +225,7 @@ export default {
         setTableTabs (title) {
             let len = this.editableTabs.length
             // 判断标签页数组是否存在当前选中导航项
-            this.editableTabs[index]
+            // this.editableTabs[index]
             let isHave = false
             let fullPath = this.$route.fullPath
             this.editableTabs.forEach(item => {

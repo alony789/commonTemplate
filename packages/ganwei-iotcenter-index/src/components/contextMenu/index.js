@@ -33,7 +33,9 @@ const ContextMenu = options => {
 };
 
 ContextMenu.close = () => {
-    instance.closed = true;
+    if (instance) {
+        instance.closed = true;
+    }
 }
 
 export default ContextMenu;

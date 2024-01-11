@@ -23,7 +23,7 @@ app.use(Element)
 app.use(i18n)
 app.config.globalProperties.Axios = Axios;
 
-app.config.globalProperties.$message = PartialNotify(app, 'ganwei-iotcenter-log-previews')
+app.config.globalProperties.$message = PartialNotify(app, 'ganwei-iotcenter-template')
 app.config.globalProperties.$hostMap = hostMap
 app.config.globalProperties.$api = api
 app.config.globalProperties.myUtils = {

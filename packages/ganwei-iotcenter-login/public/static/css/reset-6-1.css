@@ -1157,6 +1157,11 @@ select:-webkit-autofill {
     color: var(--select-dropdown-color__selected) !important;
 }
 
+.el-select-dropdown .el-select-dropdown__item.hover {
+    background-color: transparent;
+}
+
+
 .el-select-dropdown .el-cascader-menu,
 .el-cascader__dropdown .el-cascader-menu {
     color: var(--select-dropdown-color);
@@ -1434,6 +1439,10 @@ select:-webkit-autofill {
 .el-button--primary {
     background-color: var(--button-primary-color) !important;
     border-color: var(--button-primary-color) !important;
+}
+
+.el-button--primary span {
+    color: var(--message-box-button-color);
 }
 
 .el-tree .el-tree-node__content {

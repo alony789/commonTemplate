@@ -1,4 +1,4 @@
-; ((_this) => {
+((_this) => {
     _this.isGetIconfontList = _this.isGetIconfontList || false
     function setIcon () {
         let iconfontList = _this.iconfontList || []

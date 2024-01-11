@@ -18,7 +18,7 @@ window.requestLanguage = async (pluginName, menuName, packageId, vm) => {
             pluginName,
             menuName
         }
-        window.axios && window.axios({
+        window.AxiosBuilder.axios && window.AxiosBuilder.axios({
             method: 'get',
             url: '/api/localization/getjsontranslationfile',
             params: data,
@@ -37,6 +37,7 @@ window.requestLanguage = async (pluginName, menuName, packageId, vm) => {
                 }
             } else {
                 vm && vm.$message.error(message || '')
+                resolve({})
             }
         }).catch(err => {
             vm && vm.$message.error(err.data, err)

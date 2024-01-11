@@ -88,6 +88,8 @@ export default {
                 signalr.onclose(() => {
                     this.getRealTimeDataInfo()
                 })
+            }).catch(e=>{
+                this.$api.getSafeLevelByGateway().then(rt => { console.log(rt) })
             })
         },
         getEventType (level) {

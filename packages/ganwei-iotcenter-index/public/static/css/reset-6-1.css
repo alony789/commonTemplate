@@ -423,11 +423,11 @@ hr {
     border: 1px solid var(--input-border);
     background-color: var(--input-background);
     box-shadow: none !important;
-    color: var(--input-txColor1) !important;
+    color: var(--input-color) !important;
 }
 
 .el-input__wrapper input {
-    color: var(--input-txColor1) !important;
+    color: var(--input-color) !important;
 }
 
 .el-select__input {
@@ -937,6 +937,14 @@ select:-webkit-autofill {
     background-color: var(--select-dropdown-background) !important;
 }
 
+.el-popper.is-light {
+    border: 0;
+}
+
+.el-popper.is-light .el-menu--popup {
+    padding: 0;
+}
+
 .el-select__popper.el-popper[data-popper-placement^=top] .el-popper__arrow::before {
     border-color: var(--poper-border);
     background-color: var(--select-dropdown-background) !important;
@@ -1156,6 +1164,11 @@ select:-webkit-autofill {
     background-color: var(--select-dropdown-item-background__hover) !important;
     color: var(--select-dropdown-color__selected) !important;
 }
+
+.el-select-dropdown .el-select-dropdown__item.hover {
+    background-color: transparent;
+}
+
 
 .el-select-dropdown .el-cascader-menu,
 .el-cascader__dropdown .el-cascader-menu {
@@ -1425,6 +1438,10 @@ select:-webkit-autofill {
     background-color: transparent;
     border: 1px solid #3875FF;
     color: #3875FF !important;
+}
+
+.el-message-box.logoutTip .el-message-box__btns .el-button:first-child {
+    color: white !important;
 }
 
 .el-message-box .el-message-box__btns .el-button:nth-child(2) {
@@ -1733,7 +1750,7 @@ select:-webkit-autofill {
 
 .el-menu {
     background-color: transparent;
-    border-right: 1px solid transparent;
+    border-right: 0;
 }
 
 .el-menu .el-submenu__icon-arrow {
@@ -1925,7 +1942,7 @@ select:-webkit-autofill {
 }
 
 .el-menu--horizontal .el-menu--popup li.el-menu-item {
-    color: var(--nav-txColor1);
+    color: var(--frame-main-color);
     background-color: var(--menu-popup-background);
 }
 

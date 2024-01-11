@@ -15,6 +15,9 @@ export default {
     watch: {
         showDialog (val) {
             this.dialogVisible = val;
+        },
+        dialogVisible(val) {
+            if(!val) this.closeDialog()
         }
     },
     methods: {

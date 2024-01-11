@@ -31,7 +31,10 @@ export default ({ mode }) => {
         mode: 'development', // 模式
         publicDir: 'public', // 静态资源服务的文件夹
         // cacheDir: path.resolve(__dirname, '/node_modules/.vite'), // 存储缓存文件的目录
-        define: { __INTLIFY_JIT_COMPILATION__: true },
+        define: {
+            _INTLIFY_JIT_COMPILATION__: true,
+            'process.env.VITE_APP_INDEX_PORT': `"${VITE_APP_INDEX_PORT}"`
+         },
         plugins: [
             vue(),
             visualizer({
@@ -52,7 +55,6 @@ export default ({ mode }) => {
             }),
             viteAddInfoHtml()
         ],
-
         resolve: {
             alias: [
                 {

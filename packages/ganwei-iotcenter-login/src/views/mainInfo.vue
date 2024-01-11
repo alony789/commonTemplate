@@ -1,14 +1,9 @@
 <template>
     <div class="mainInfo">
-        <!-- <video autoplay loop muted>
-            <source :src="url" type="video/mp4" />
-        </video> -->
         <div class="loginBg">
             <loginBg></loginBg>
         </div>
-
         <el-form ref="licenseForm" :model="licenseForm" class="license" label-position="top">
-
             <el-form-item :label="$t('login.mainInfoDialog.labels.registryCode')" prop="registrationCode"
                 :label-width="labelWidth">
                 <el-input v-model="licenseForm.registrationCode" autocomplete="off" disabled></el-input>
@@ -45,9 +40,7 @@
             <el-form-item style="text-align: center;">
                 <el-button size="small" type="primary" @click="DownLoadXlog">{{
                     $t('login.mainInfoDialog.button.downLoadLogs') }}</el-button>
-                <el-button size="small" type="primary" @click="changeEvents" v-if="!isInitSate">{{
-                    $t('login.mainInfoDialog.button.init') }}</el-button>
-                <el-button size="small" type="primary" @click="changeEvents" v-else>{{
+                <el-button size="small" type="primary" @click="changeEvents">{{
                     $t('login.mainInfoDialog.button.updateLisens') }}</el-button>
             </el-form-item>
 

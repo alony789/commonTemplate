@@ -1,9 +1,9 @@
 {
     "addressMapping": {
-        "ganwei-iotcenter-index": "http://localhost:8120",
-        "ganwei-iotcenter-login": "http://localhost:8160",
-        "ganwei-iotcenter-template": "http://localhost:8190"
+        "ganwei-iotcenter-index": "http://127.0.0.1:8120",
+        "ganwei-iotcenter-login": "http://127.0.0.1:8160",
+        "ganwei-iotcenter-template": "http://127.0.0.1:8190"
     },
     "applicationPath": {},
-    "proxyTarget": "https://127.0.0.1:44380/"
+    "proxyTarget": "https://test.iotapp.ganweicloud.com:44380/"
 }

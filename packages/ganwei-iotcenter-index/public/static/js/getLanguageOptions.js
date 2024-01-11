@@ -1,3 +1,4 @@
+
 sessionStorage.isGetLanguageOptions = sessionStorage.isGetLanguageOptions == 'true' || false
 window.getLanguageOptions = function () {
     return new Promise((resolve, reject) => {
@@ -5,10 +6,10 @@ window.getLanguageOptions = function () {
         if (LanguageOptions) {
             resolve(JSON.parse(LanguageOptions))
         } else {
-            if (window.axios) {
+            if (window.AxiosBuilder.axios) {
                 if (sessionStorage.isGetLanguageOptions == 'false') {
                     sessionStorage.isGetLanguageOptions = true
-                    window.axios({
+                    window.AxiosBuilder.axios({
                         methed: 'get',
                         url: '/api/localization/getsupportedcultures',
                         headers: {

@@ -1,17 +1,21 @@
 {
-    "name": "vite-cli",
+    "name": "ganwei-vite-cli",
     "private": true,
     "version": "0.0.1",
     "type": "module",
     "scripts": {
         "dev": "pnpm -r --parallel --filter=ganwei-iotcenter-* run dev",
         "build": "pnpm --filter \"ganwei-iotcenter-*\" build",
-        "updateModule": "pnpm --filter \"ganwei-iotcenter-*\" updateModule",
         "download": "node ./configuration/gitClone.js",
         "cleanAll": "node ./configuration/cleanNodeModule.js",
-        "public": "npm config set registry=https://mirrors.cloud.tencent.com/npm/"
+        "updateModule": "node ./configuration/postInstall.cjs && node ./configuration/copyFile.js",
+        "postinstall": "pnpm updateModule",
+        "start": "pnpm updateModule && pnpm install && pnpm dev"
     },
-    "dependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "https://gitee.com/shend/ganwei-app.git"
+    },
     "pnpm": {
         "packageExtensions": {
             "vue-template-compiler": {
@@ -20,5 +24,15 @@
                 }
             }
         }
+    },
+    "optionalDependencies": {
+        "gw-base-api-plus": "6.1",
+        "gw-base-components-plus": "6.1",
+        "gw-base-style-plus": "6.1",
+        "gw-base-utils-plus": "6.1",
+        "gw-module-version": "^1.0.1"
+    },
+    "dependencies": {
+        "prompts": "^2.4.2"
     }
 }

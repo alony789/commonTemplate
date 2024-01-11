@@ -1092,6 +1092,11 @@ select:-webkit-autofill {
     background-color: var(--popover-hoverBgColor) !important
 }
 
+.el-select-dropdown .el-select-dropdown__item.hover {
+    background-color: transparent;
+}
+
+
 .el-select-dropdown .el-cascader-menu,
 .el-cascader__dropdown .el-cascader-menu {
     color: var(--popover-txColor);

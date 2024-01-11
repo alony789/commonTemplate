@@ -127,11 +127,18 @@ export default {
     height: 3px;
     width: 3px;
     border-radius: 50%;
-    background-color: var(--nav-txColor1);
+    background-color: var(--menu-color);
     flex-shrink: 0;
 }
 
 .menuOverflowPoper {
-    color: var(--nav-txColor1) !important;
+    color: var(--menu-color) !important;
+    border: 1px solid var(--poper-border) !important;
+}
+
+.menuOverflowPoper .el-popper__arrow::before{
+    background: var(--select-dropdown-background) !important;
+    border: 1px solid var(--poper-border) !important;
+
 }
 </style>

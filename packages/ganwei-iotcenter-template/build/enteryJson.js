@@ -21,7 +21,7 @@ export const externalTag = [
         injectTo: "head-prepend"
     },
     {
-        src: `/static/themes/default-theme.js`,
+        src: `/static/themes/default-theme-6-1.js`,
         mode: 'dev',
         tag: "script",
         injectTo: "head"

@@ -1,10 +1,4 @@
-/*
- * @Description:
- * @Version: v1
- * @Author: zkx
- * @LastEditTime: 2023-08-29 09:26:14
- * Copyright (c) 2023 by 敢为软件, All Rights Reserved.
- */
+
 import CHILDPROCESS from 'child_process';
 import fs from 'fs';
 import path from 'path';

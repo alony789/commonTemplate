@@ -1,6 +1,6 @@
 <template>
     <el-dialog :title="$t('login.framePro.title.dialogSystemInfoTitle')" class="systemInformation_main"
-        v-model="dialogVisible" :before-close="closeDialog" width="600px" top="30vh" center>
+        v-model="dialogVisible" :before-close="closeDialog" width="600px" top="15vh" center>
         <div class="systemInformation">
             <!-- <header>系统运行信息</header> -->
             <div class="information_box">

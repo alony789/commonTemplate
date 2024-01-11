@@ -8,24 +8,17 @@ module.exports = {
         node: true
     },
     extends: [
-        // 'eslint:recommended',
+        'eslint:recommended',
         'plugin:vue/vue3-essential',
         'plugin:@typescript-eslint/recommended'
         // 'plugin:prettier/recommended' // 解决ESlint和Prettier冲突
     ],
-    overrides: [
-        {
-            files: ['src/views/**/*.vue'],
-            rules: {
-                'vue/multi-word-component-names': 0
-            }
-        }
-    ],
+    overrides: [],
     parser: 'vue-eslint-parser',
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        parser: '@typescript-eslint/parser',
+        // parser: '@typescript-eslint/parser',
         ecmaFeatures: {
             jsx: true
         }
